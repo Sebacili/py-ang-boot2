@@ -101,6 +101,43 @@ def serv11():
   df11 = pd.read_sql(query,connection)
   return render_template("1servizio.html", visua11 = df11)
 
+@app.route('/servizio12', methods=['GET'])
+def serv12():
+  datains = request.args['datains']
+  query=f"select artista.nome, artista.cognome, opera.titolo from opera inner join artista on opera.idA = artista.id where data_decesso = '{datains}'"
+  df12 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua12 = df12)
+
+@app.route('/servizio13', methods=['GET'])
+def serv13():
+
+  query=f"select artista.nome, artista.cognome, opera.titolo, opera.tecnica, opera.stile, museo.nome, museo.citta, museo.paese from artista inner join opera on opera.idA = artista.id inner join museo on museo.id = opera.idM where artista.data_decesso is null"
+
+  df13 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua13 = df13)
+
+@app.route('/servizio14', methods=['GET'])
+def serv14():
+
+  query = f"select artista.nome, artista.cognome from artista where data_nascita = '{datains}'"
+  df14 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua14 = df14)
+
+@app.route('/servizio15', methods=['GET'])
+def serv15():
+  cittanatins = request.args['cittanatins']
+  query=f"select artista.nome, artista.cognome, opera.titolo, museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where citta_natale = '{cittanatins}'"
+  df15 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua15 = df15)
+
+@app.route('/servizio16', methods=['GET'])
+def serv16():
+  nome_utente = request.args['nome_utente']
+  email = request.args['email']
+  password = request.args['password']
+  query=f"insert into utente(nome_utente, email, password) values('{nome_utente}', '{email}','{password}')"
+  df16 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua16 = df16)
 
 
 
