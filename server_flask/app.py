@@ -130,14 +130,69 @@ def serv15():
   df15 = pd.read_sql(query,connection)
   return render_template("1servizio.html", visua15 = df15)
 
-@app.route('/servizio16', methods=['GET'])
+@app.route('/servizio16', methods=['POST'])
 def serv16():
   nome_utente = request.args['nome_utente']
   email = request.args['email']
   password = request.args['password']
-  query=f"insert into utente(nome_utente, email, password) values('{nome_utente}', '{email}','{password}')"
+  query=f"insert into utente(nome_utente, email, passw) values('{nome_utente}', '{email}','{password}')"
   df16 = pd.read_sql(query,connection)
   return render_template("1servizio.html", visua16 = df16)
+
+
+@app.route('/servizio17', methods=['POST'])
+def serv17():
+  nomeutente = request.args['nome_utente']
+  email = request.args['email']
+  password = request.args['password']
+  query= f"select * from login where nomeutente='{nomeutente}' and email='{email}' and passw='{password}'"
+  df17 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua17 = df17)
+
+  
+
+@app.route('/servizio18', methods=['POST'])
+def serv18():
+  old_name = request.args['old_name']
+  new_name = request.args['new_name']
+  new_email = request.args['new_email']
+  old_email = request.args['old_email']
+  new_password = request.args['new_password']
+  current_email = request.args['current_email']
+
+  query=f"update utente set nome_utente = '{new_name}' where nome_utente ='{old_name}'"
+  query2=f"update utente set email= '{new_email}' where email='{old_email}'"
+  query3=f"update utente set password= '{new_password}' where email='{current_email}'"
+
+  df18 = pd.read_sql(query,connection)
+  df19 =  pd.read_sql(query2,connection)
+  df20 =  pd.read_sql(query3,connection)
+  return render_template("1servizio.html", visua18 = df18,visua10 = df19, visua20 = df20)
+
+
+  
+
+@app.route('/servizio21', methods=['POST'])
+def serv19():
+  current_email = request.args['current_email']
+  query=f"select nome_utente, email, password from utente where email='{current_email}'"
+  df21 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua21 = df21)
+
+@app.route('/servizio22', methods=['POST'])
+def serv22():
+  current_name = request.args['current_name']
+  current_email = request.args['current_email']
+  current_password = request.args['current_password']
+  query=f"delete from utente where nome_utente='{current_name}' and email='{current_email}' and password ='{current_password}'"
+
+  df22 = pd.read_sql(query,connection)
+  return render_template("1servizio.html", visua22 = df22)
+
+
+
+
+
 
 
 
