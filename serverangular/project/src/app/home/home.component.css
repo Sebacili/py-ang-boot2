@@ -6,7 +6,10 @@
     border-top: 0px;
     border-bottom: 0px;
     border-radius: 5px;
-    /*height: 93vh;*/
+    height: 93vh;
+}
+.container__contenuto{
+    display: flex;
 }
 a, a:hover, a:active, a:visited, a:focus {
     text-decoration:none;
@@ -19,5 +22,9 @@ img.immagine{
     display: block;
     margin-left: auto;
     margin-right: auto;
+
     width: 50%;
+}
+.cont_img{
+    
 }
