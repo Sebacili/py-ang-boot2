@@ -132,19 +132,19 @@ def serv15():
 
 @app.route('/servizio16', methods=['POST'])
 def serv16():
-  nome_utente = request.args['nome_utente']
-  email = request.args['email']
-  password = request.args['password']
-  query=f"insert into utente(nome_utente, email, passw) values('{nome_utente}', '{email}','{password}')"
+  nome_utente = request.form['nome_utente']
+  email = request.form['email']
+  password = request.form['password']
+  query=f"insert into utente(nome_utente,email, passw) values('{nome_utente}','{email}','{password}');"
   df16 = pd.read_sql(query,connection)
   return render_template("1servizio.html", visua16 = df16)
 
 
 @app.route('/servizio17', methods=['POST'])
 def serv17():
-  nomeutente = request.args['nome_utente']
-  email = request.args['email']
-  password = request.args['password']
+  nomeutente = request.form['nome_utente']
+  email = request.form['email']
+  password = request.form['password']
   query= f"select * from login where nomeutente='{nomeutente}' and email='{email}' and passw='{password}'"
   df17 = pd.read_sql(query,connection)
   return render_template("1servizio.html", visua17 = df17)
