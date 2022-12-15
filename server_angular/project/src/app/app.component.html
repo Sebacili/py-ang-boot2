@@ -48,13 +48,13 @@
       </div>
 
     </div>
-    <form class="form-inline ">
-      <button class="btn btn-outline-light my-2 my-sm-0" onclick="location.href='http://www.example.com'" type="button">Sign up</button>
+    <div class="form-inline ">
+      <button class="btn btn-outline-light my-2 my-sm-0" routerLink="/register" type="button">Sign up</button>
       <button class="btn btn-outline-light my-2 my-sm-0" onclick="location.href='http://www.example.com'" type="button">login</button>
-    </form>
+    </div>
   </nav>
-
+  <router-outlet></router-outlet>
   <app-home></app-home>
-
+  
 
 </body>
