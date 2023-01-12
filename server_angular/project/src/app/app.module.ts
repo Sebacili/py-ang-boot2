@@ -8,18 +8,21 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MuseiComponent } from './musei/musei.component';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    MuseiComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    // HttpClientModule
 
   ],
   providers: [],
