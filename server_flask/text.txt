@@ -1,1 +1,1 @@
-pip install flask pymssql matplotlib pandas contextily 
+pip install flask pymssql  pandas jsonify

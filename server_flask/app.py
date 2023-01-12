@@ -34,13 +34,26 @@ def get_musei():
   data = cursor.fetchall()
 
   return jsonify(data)
-
+# Ritorna personaggi
 @app.route('/servizio2', methods=['GET'])
 def serv2():
   titolo_ins = request.args['titolo_ins']
   query = f"select nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{titolo_ins}'"
   df2 = pd.read_sql(query,conn)
   return render_template("1servizio.html", visua2 = df2)
+
+# Ritorna personaggi
+@app.route('/api/personaggi', methods=['GET'])
+def get_personaggi():
+  data = request.args.get('personaggi')
+
+  q = 'select museo.nome,opera.titolo,artista.nome,artista.cognome,personaggio.nome from museo inner join opera on museo.ID = opera.IDM inner join artista on opera.IDA = artista.id inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id' + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+
+  return jsonify(data)
 
 @app.route('/servizio3', methods=['GET'])
 def serv3():
@@ -49,6 +62,19 @@ def serv3():
   df3 = pd.read_sql(query,conn)
   return render_template("1servizio.html", visua3 = df3)
 
+
+@app.route('/api/personaggi', methods=['GET'])
+def get_personaggi():
+  data = request.args.get('personaggi')
+
+  q = 'select museo.nome,opera.titolo,artista.nome,artista.cognome,personaggio.nome from museo inner join opera on museo.ID = opera.IDM inner join artista on opera.IDA = artista.id inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id' + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+
+  return jsonify(data)
+  
 @app.route('/servizio4', methods=['GET'])
 def serv4():
   nomeartista = request.args['nomeartista']
