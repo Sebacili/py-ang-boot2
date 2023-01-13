@@ -16,11 +16,11 @@ def home():
     return render_template("homepage.html")
 
 # Ritorna la lista dei musei 
-@app.route('/servizio1', methods=['GET'])
-def serv1():
-  query= 'select museo.nome,opera.titolo,artista.nome,artista.cognome,personaggio.nome from museo inner join opera on museo.ID = opera.IDM inner join artista on opera.IDA = artista.id inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id'
-  df1 = pd.read_sql(query,conn)
-  return jsonify(df1)
+#@app.route('/servizio1', methods=['GET'])
+#def serv1():
+# query= 'select museo.nome,opera.titolo,artista.nome,artista.cognome,personaggio.nome from museo inner join opera on museo.ID = opera.IDM inner join artista on opera.IDA = artista.id inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id'
+# df1 = pd.read_sql(query,conn)
+# return jsonify(df1)
 
 # Ritorna la lista dei musei 
 @app.route('/api/musei', methods=['GET'])
@@ -35,39 +35,40 @@ def get_musei():
 
   return jsonify(data)
 # Ritorna personaggi
-@app.route('/servizio2', methods=['GET'])
-def serv2():
-  titolo_ins = request.args['titolo_ins']
-  query = f"select nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{titolo_ins}'"
-  df2 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua2 = df2)
+#@app.route('/servizio2', methods=['GET'])
+#ef serv2():
+# personaggi = request.args['personaggi']
+# query = f"select nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{personaggi}'"
+# df2 = pd.read_sql(query,conn)
+# return render_template("1servizio.html", visua2 = df2)
 
 # Ritorna personaggi
 @app.route('/api/personaggi', methods=['GET'])
 def get_personaggi():
   data = request.args.get('personaggi')
 
-  q = 'select museo.nome,opera.titolo,artista.nome,artista.cognome,personaggio.nome from museo inner join opera on museo.ID = opera.IDM inner join artista on opera.IDA = artista.id inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id' + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  q = f"select nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
   cursor = conn.cursor(as_dict=True)
   p = {"data": f"%{data}%"}
   cursor.execute(q, p)
   data = cursor.fetchall()
 
   return jsonify(data)
+#visualizzare museo
+#@app.route('/servizio3', methods=['GET'])
+#def serv3():
+#museo_personaggio = request.args['museo_personaggio']
+#query = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'"
+#df3 = pd.read_sql(query,conn)
+#return render_template("1servizio.html", visua3 = df3)
 
-@app.route('/servizio3', methods=['GET'])
-def serv3():
-  pers_ins = request.args['pers_ins']
-  query = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{pers_ins}'"
-  df3 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua3 = df3)
+#visualizzare museo inserendo personaggio
 
+@app.route('/api/museo_personaggio', methods=['GET'])
+def get_museo_personaggio():
+  data = request.args.get('museo_personaggio')
 
-@app.route('/api/personaggi', methods=['GET'])
-def get_personaggi():
-  data = request.args.get('personaggi')
-
-  q = 'select museo.nome,opera.titolo,artista.nome,artista.cognome,personaggio.nome from museo inner join opera on museo.ID = opera.IDM inner join artista on opera.IDA = artista.id inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id' + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  q = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
   cursor = conn.cursor(as_dict=True)
   p = {"data": f"%{data}%"}
   cursor.execute(q, p)
@@ -83,6 +84,31 @@ def serv4():
   df4 = pd.read_sql(query,conn)
   return render_template("1servizio.html", visua4 = df4)
 
+@app.route('/api/musei', methods=['GET'])
+def get_musei():
+  artist_name = request.args.get('artist_name')
+  artist_surname = request.args.get('artist_surname')
+
+  query = 'SELECT museo.nome, opera.titolo, artista.nome, artista.cognome, personaggio.nome ' \
+          'FROM museo ' \
+          'INNER JOIN opera ON museo.ID = opera.IDM ' \
+          'INNER JOIN artista ON opera.IDA = artista.id ' \
+          'INNER JOIN appartiene ON opera.id = appartiene.idO ' \
+          'INNER JOIN personaggio ON appartiene.idP = personaggio.id'
+
+  if artist_name is not None and artist_name != '':
+      query += f" WHERE artista.nome LIKE '%{artist_name}%'"
+  if artist_surname is not None and artist_surname != '':
+      query += f" AND artista.cognome LIKE '%{artist_surname}%'"
+
+  cursor = conn.cursor(as_dict=True)
+  cursor.execute(query)
+  data = cursor.fetchall()
+
+  return jsonify(data)
+
+
+
 @app.route('/servizio5', methods=['GET'])
 def serv5():
   nomeins = request.args['nomeins']
@@ -92,7 +118,17 @@ def serv5():
   df5 = pd.read_sql(query,conn)
   return render_template("1servizio.html", visua5 = df5)
 
-  
+@app.route('/api/nomecognome_artista', methods=['GET'])
+def get_museo_personaggio():
+  data = request.args.get('museo_personaggio')
+
+  q = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+  return jsonify(data)
+
 @app.route('/servizio6', methods=['GET'])
 def serv6():
   
