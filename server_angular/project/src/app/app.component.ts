@@ -13,4 +13,7 @@ export class AppComponent {
   toggleDisplay() {
     this.isShow = !this.isShow;
   }
+
+
+
 }
