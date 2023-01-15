@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TempNumberService } from './temp-number.service';
+// import { tempNum } from './temp-number.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,7 @@ export class AppComponent {
     this.isShow = !this.isShow;
   }
 
+  @Input() tempNum :  number = 0;
 
 
 }
