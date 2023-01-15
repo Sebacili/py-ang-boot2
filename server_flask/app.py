@@ -277,5 +277,42 @@ def serv22():
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/backend/collaborators', methods=['GET'])
+def backend():
+    return render_template("backend.html")
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3245, debug=True)
