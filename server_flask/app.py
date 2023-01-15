@@ -47,7 +47,7 @@ def get_musei():
 def get_personaggi():
   data = request.args.get('personaggi')
 
-  q = f"select nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  q = f"select personaggio.nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
   cursor = conn.cursor(as_dict=True)
   p = {"data": f"%{data}%"}
   cursor.execute(q, p)
@@ -85,7 +85,7 @@ def serv4():
   return render_template("1servizio.html", visua4 = df4)
 
 @app.route('/api/musei', methods=['GET'])
-def get_musei():
+def get_musei2():
   artist_name = request.args.get('artist_name')
   artist_surname = request.args.get('artist_surname')
 
@@ -119,7 +119,7 @@ def serv5():
   return render_template("1servizio.html", visua5 = df5)
 
 @app.route('/api/nomecognome_artista', methods=['GET'])
-def get_museo_personaggio():
+def get_museo_personaggio2():
   data = request.args.get('museo_personaggio')
 
   q = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
