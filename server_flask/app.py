@@ -302,9 +302,30 @@ def serv22():
 
 @app.route('/backend/collaborators', methods=['GET'])
 def backend():
-    return render_template("backend.html")
+  return render_template("backend.html")
+    
+@app.route('/backend/collaborators/modificadesiderata', methods=['GET'])
+def modificadesiderata():
+  global entitascelta
+  entitascelta = request.args['entita']
+  return render_template("tipodimodifica.html" )
+  # if entita =="Museo":
+  #   return render_template("DBM.html");
+  # elif entita =="Artista":
+  #   return render_template("DBA.html")
+  # elif entita =="Opera":
+  #   return render_template("DBO.html")
+  # elif entita =="Personaggio":
+  #   return render_template("DBP.html")
+  # else:
+  #   return render_template("DBU.html")
+ 
 
-
+@app.route('/backend/collaborators/modificadesiderata/tipodimodifica', methods=['GET'])
+def tipodimodifica():
+  tiposcelto = request.args['entita']
+  # if tiposcelto =="Modificare" and entitascelta == "Museo" 
+  return render_template("col_mod.html")
 
 
 
