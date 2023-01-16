@@ -63,3 +63,24 @@
     <p><input type = "submit" value = "Submit" /></p>
 </form>
 <hr>
+
+<h3>Aggiornare Informazione</h3>
+<p>tip puoi eliminare un valore sostituendolo con uno spazio bianco o mettere null come valore</p>
+<form action="/data" method = "GET">
+    <!-- input textbox -->
+    <p>vorrei aggiornare l'informazione della colonna  <input type = "text" name = "nome_col" /> e il suo valore a <input type = "text" name = "new_val" /> where id è <input type = "text" name = "id" />
+
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+
+<h3>Eliminare Informazione</h3>
+<form action="/data" method = "GET">
+    <!-- input textbox -->
+    <p>vorrei eliminare il row / i row dove il valore è uguale a : <input type = "text" name = "val_elim" />
+
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
