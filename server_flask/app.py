@@ -61,7 +61,7 @@ def get_personaggi():
 #query = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'"
 #df3 = pd.read_sql(query,conn)
 #return render_template("1servizio.html", visua3 = df3)
-
+#
 #visualizzare museo inserendo personaggio
 
 @app.route('/api/museo_personaggio', methods=['GET'])
