@@ -1,0 +1,27 @@
+<p> Modificare / aggiungere colonna works!</p>
+
+
+<h1>Aggiungere colonna</h1>
+<form action="/data" method = "GET">
+    <!-- input textbox -->
+    <p>vorrei aggiungere una colonna chiamata: <input type = "text" name = "nome_col" /><br>
+        di tipo: <br>
+            <select name="data_type">
+            <option value="int">int</option>
+            <option value="datetime">datetime</option>
+            <option value="varchar">varchar</option>
+            </select>
+    </p>
+
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+<h1>Eliminare colonna</h1>
+<form action="/data" method = "GET">
+    <!-- input textbox -->
+    <p>vorrei eliminare una colonna di nome: <input type = "text" name = "nome_col" /><br>
+    </p>
+
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>

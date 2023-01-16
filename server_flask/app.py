@@ -371,7 +371,7 @@ def backend():
 def modificadesiderata():
   global entitascelta
   entitascelta = request.args['entita']
-  return render_template("tipodimodifica.html" )
+  return render_template("modifiche.html" )
   # if entita =="Museo":
   #   return render_template("DBM.html");
   # elif entita =="Artista":
@@ -384,11 +384,21 @@ def modificadesiderata():
   #   return render_template("DBU.html")
  
 
-@app.route('/backend/collaborators/modificadesiderata/tipodimodifica', methods=['GET'])
-def tipodimodifica():
-  tiposcelto = request.args['entita']
-  # if tiposcelto =="Modificare" and entitascelta == "Museo" 
-  return render_template("col_mod.html")
+
+
+
+# @app.route('/backend/collaborators/modificadesiderata/tipodimodificascelta', methods=['GET'])
+# def tipodimodifica():
+#   tiposcelto = request.args['tipo']
+#   if tiposcelto =="Modificare_col":
+#     return render_template("Modificare_aggiungere_colonna.html");
+#   elif tiposcelto =="Modificare":
+#     return render_template("modifica_info.html");
+#   elif tiposcelto =="Aggiungere":
+#     return render_template("Modificare_aggiungere_colonna.html");
+#   else:
+#     return render_template("Modificare_aggiungere_colonna.html");
+
 
 
 
