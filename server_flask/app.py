@@ -120,22 +120,37 @@ def get_artista_musei():
 
 @app.route('/api/nomecognome_artista', methods=['GET'])
 def get_nomecognome_artista():
-  data = request.args.get('museo_personaggio')
+  nomeartista = request.args.get('museo_personaggio')
+  cognomeartista =  request.args.get('museo_personaggio')
+  q = f"select nome, cognome, data_nascita, data_decesso, citta_natale, paese_natale, citta_decesso, paese_decesso from artista where nome='{nomeartista}' and cognome='{cognomeartista}'"
+   if nomeartista is not None and nomeartista != '':
+      q += f" WHERE artista.nome LIKE '%{nomeartista}%'"
+  if cognomeartista is not None and cognomeartista != '':
+      q += f" AND artista.cognome LIKE '%{cognomeartista}%'"
+  
+  cursor = conn.cursor(as_dict=True)
+  cursor.execute(query, (nomeartista,cognomeartista))
+  data = cursor.fetchall()
+  return jsonify(data)
+#informazioni su tutti gli artisti
+#@app.route('/servizio6', methods=['GET'])
+#def serv6():
+  
+# query = "select * from artista"
+# df6 = pd.read_sql(query,conn)
+# return render_template("1servizio.html", visua6 = df6)
 
-  q = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+@app.route('/api/artisti', methods=['GET'])
+def get_artisti():
+  data = request.args.get('artisti')
+
+  q = 'select * from artista' + (' WHERE artista.nome LIKE %(data)s' if data != None and data != '' else "")
   cursor = conn.cursor(as_dict=True)
   p = {"data": f"%{data}%"}
   cursor.execute(q, p)
   data = cursor.fetchall()
+
   return jsonify(data)
-
-@app.route('/servizio6', methods=['GET'])
-def serv6():
-  
-  query = "select * from artista"
-  df6 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua6 = df6)
-
     
 @app.route('/servizio7', methods=['GET'])
 def serv7():
