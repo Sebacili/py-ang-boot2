@@ -151,71 +151,175 @@ def get_artisti():
   data = cursor.fetchall()
 
   return jsonify(data)
-    
-@app.route('/servizio7', methods=['GET'])
-def serv7():
-  tecnicascelta = request.args['tecnicascelta']
-  query= f"select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{tecnicascelta}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{tecnicascelta}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile) as tot)"
-  df7 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua7 = df7)
-
-@app.route('/servizio8', methods=['GET'])
-def serv8():
-  stileins = request.args['stileins']
-  query= f"select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where opera.stile='{stileins}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where opera.stile='{stileins}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica) as tot)"
+    #visualizzazione del museo che contiene più opere create con una tecnica specifica scelta dall’utente
+#@app.route('/servizio7', methods=['GET'])
+#def serv7():
+  #tecnicascelta = request.args['tecnicascelta']
+ #query= f"select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{tecnicascelta}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{tecnicascelta}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile) as tot)"
+ #df7 = pd.read_sql(query,conn)
+ #return render_template("1servizio.html", visua7 = df7)
 
 
-  df8 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua8 = df8)
+@app.route('/api/tecnica_museo', methods=['GET'])
+def get_tecnica_museo():
+  data = request.args.get('tecnicascelta')
 
-@app.route('/servizio9', methods=['GET'])
-def serv9():
-  query= "select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome having count(titolo) = (select max(tot_opere) from (select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome)as tot)"
-  df9 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua9 = df9)
+  q = f"select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile) as tot)" + (' WHERE artista.nome LIKE %(data)s' if data != None and data != '' else "")
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
 
-@app.route('/servizio10', methods=['GET'])
-def serv10():
-  query= "select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome having count(titolo) = (select min(tot_opere) from (select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome)as tot)"
-  df10 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua10 = df10)
+#@app.route('/servizio8', methods=['GET'])
+#def serv8():
+# stileins = request.args['stileins']
+# query= f"select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where opera.stile='{stileins}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where opera.stile='{stileins}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica) as tot)"
+#
+#
+# df8 = pd.read_sql(query,conn)
+# return render_template("1servizio.html", visua8 = df8)
 
 
-@app.route('/servizio11', methods=['GET'])
-def serv11():
-  titoloins = request.args['titoloins']
-  query=f"select * from opera where titolo='{titoloins}'"
-  df11 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua11 = df11)
+@app.route('/api/stile_museo', methods=['GET'])
+def get_stile_museo():
+  data = request.args.get('stileins')
 
-@app.route('/servizio12', methods=['GET'])
-def serv12():
-  datains = request.args['datains']
-  query=f"select artista.nome, artista.cognome, opera.titolo from opera inner join artista on opera.idA = artista.id where data_decesso = '{datains}'"
-  df12 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua12 = df12)
+  q = "select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where opera.stile='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where opera.stile='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.tecnica) as tot)" + (' WHERE artista.nome LIKE %(data)s' if data != None and data != '' else "")
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
 
-@app.route('/servizio13', methods=['GET'])
-def serv13():
+#visualizzazione personaggio che compare in più opere
+#@app.route('/servizio9', methods=['GET'])
+#def serv9():
+#  query= "select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome having count(titolo) = (select max(tot_opere) from (select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome)as tot)"
+#  df9 = pd.read_sql(query,conn)
+#  return render_template("1servizio.html", visua9 = df9)
 
-  query=f"select artista.nome, artista.cognome, opera.titolo, opera.tecnica, opera.stile, museo.nome, museo.citta, museo.paese from artista inner join opera on opera.idA = artista.id inner join museo on museo.id = opera.idM where artista.data_decesso is null"
 
-  df13 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua13 = df13)
+@app.route('/api/personaggio_opere_max', methods=['GET'])
+def get_personaggio_opere_max():
+  data = request.args.get('personaggio_opere')
 
-@app.route('/servizio14', methods=['GET'])
-def serv14():
+  q = "select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome having count(titolo) = (select max(tot_opere) from (select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome)as tot)" 
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
 
-  query = f"select artista.nome, artista.cognome from artista where data_nascita = '{datains}'"
-  df14 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua14 = df14)
+#visualizzazione del personaggio che compare di meno
+#@app.route('/servizio10', methods=['GET'])
+#def serv10():
+#  query= "select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome having count(titolo) = (select min(tot_opere) from (select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome)as tot)"
+#  df10 = pd.read_sql(query,conn)
+#  return render_template("1servizio.html", visua10 = df10)
 
-@app.route('/servizio15', methods=['GET'])
-def serv15():
-  cittanatins = request.args['cittanatins']
-  query=f"select artista.nome, artista.cognome, opera.titolo, museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where citta_natale = '{cittanatins}'"
-  df15 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua15 = df15)
+@app.route('/api/personaggio_opere_min', methods=['GET'])
+def get_personaggio_opere_min():
+  data = request.args.get('personaggio_opere_min')
+
+  q ="select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome having count(titolo) = (select min(tot_opere) from (select personaggio.nome, count(titolo) as tot_opere from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id group by personaggio.nome)as tot)" 
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+
+
+#visualizzazione dell’opera con un titolo inserito dall’utente
+
+#@app.route('/servizio11', methods=['GET'])
+#def serv11():
+#  titoloins = request.args['titoloins']
+#  query=f"select * from opera where titolo='{titoloins}'"
+#  df11 = pd.read_sql(query,conn)
+#  return render_template("1servizio.html", visua11 = df11)
+
+@app.route('/api/opera_titolo', methods=['GET'])
+def get_opera_titolo():
+  data = request.args.get('titoloins')
+
+  q =f"select * from opera where titolo='{data}'" + (' WHERE titolo LIKE %(data)s' if data != None and data != '' else "")                                                                                           
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+
+
+#visualizzazione degli artisti deceduti nell’anno inserito dall'utente e le loro opere
+#@app.route('/servizio12', methods=['GET'])
+#def serv12():
+#  datains = request.args['datains']
+#  query=f"select artista.nome, artista.cognome, opera.titolo from opera inner join artista on opera.idA = artista.id where data_decesso = '{datains}'"
+#  df12 = pd.read_sql(query,conn)
+#  return render_template("1servizio.html", visua12 = df12)
+
+@app.route('/api/anno_artista', methods=['GET'])
+def get_anno_artista():
+  data = request.args.get('datains')
+
+  q =f"select artista.nome, artista.cognome, opera.titolo from opera inner join artista on opera.idA = artista.id where data_decesso = '{data}'" + (' WHERE titolo LIKE %(data)s' if data != None and data != '' else "")                                                                                           
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+
+#visualizzazione degli artisti ancora in vita e le loro opere e in quale museo è esposto
+
+#@app.route('/servizio13', methods=['GET'])
+#def serv13():
+#
+#  query=f"select artista.nome, artista.cognome, opera.titolo, opera.tecnica, opera.stile, museo.nome, museo.citta, museo.paese from artista inner join opera on opera.idA = artista.id inner join museo on museo.id = opera.idM where artista.data_decesso is null"
+#
+#  df13 = pd.read_sql(query,conn)
+#  return render_template("1servizio.html", visua13 = df13)
+
+@app.route('/api/artisti_in_vita', methods=['GET'])
+def get_artisti_in_vita():
+  data = request.args.get('artisti_vivi')
+
+  q =f"select artista.nome, artista.cognome, opera.titolo, opera.tecnica, opera.stile, museo.nome, museo.citta, museo.paese from artista inner join opera on opera.idA = artista.id inner join museo on museo.id = opera.idM where artista.data_decesso is null"                                                                                         
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+
+#@app.route('/servizio14', methods=['GET'])
+#def serv14():
+#
+#  query = f"select artista.nome, artista.cognome from artista where data_nascita = '{datains}'"
+#  df14 = pd.read_sql(query,conn)
+#  return render_template("1servizio.html", visua14 = df14)
+
+
+@app.route('/api/anno_data_artisti', methods=['GET'])
+def get_anno_data_artisti():
+  data = request.args.get('datanascitains')
+
+  q = f"select artista.nome, artista.cognome from artista where data_nascita = '{data}'" + (' WHERE titolo LIKE %(data)s' if data != None and data != '' else "")                                                                                       
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
+
+#visualizzazione artisti e le loro opere e in quale musei sono esposti in base alla città natale che è stato inserito dall’utente
+#@app.route('/servizio15', methods=['GET'])
+#def serv15():
+#  cittanatins = request.args['cittanatins']
+#  query=f"select artista.nome, artista.cognome, opera.titolo, museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where citta_natale = '{cittanatins}'"
+#  df15 = pd.read_sql(query,conn)
+#  return render_template("1servizio.html", visua15 = df15)
+
+
+@app.route('/api/cittanatale', methods=['GET'])
+def get_cittanatale():
+  data = request.args.get('cittanatins')
+
+  q = f"select artista.nome, artista.cognome, opera.titolo, museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where citta_natale = '{data}'"  + (' WHERE titolo LIKE %(data)s' if data != None and data != '' else "")                                                                                        
+  cursor = conn.cursor(as_dict=True)
+  p = {"data": f"%{data}%"}
+  cursor.execute(q, p)
+  data = cursor.fetchall()
 
 @app.route('/servizio16', methods=['POST'])
 def serv16():
