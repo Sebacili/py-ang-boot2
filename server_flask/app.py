@@ -47,7 +47,7 @@ def get_musei():
 def get_personaggi():
   data = request.args.get('personaggi')
 
-  q = f"select personaggio.nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  q = f"select personaggio.nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{data}'" + (' WHERE personaggio.nome LIKE %(data)s' if data != None and data != '' else "")
   cursor = conn.cursor(as_dict=True)
   p = {"data": f"%{data}%"}
   cursor.execute(q, p)
@@ -61,40 +61,36 @@ def get_personaggi():
 #query = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'"
 #df3 = pd.read_sql(query,conn)
 #return render_template("1servizio.html", visua3 = df3)
-
+#
 #visualizzare museo inserendo personaggio
 
 @app.route('/api/museo_personaggio', methods=['GET'])
 def get_museo_personaggio():
   data = request.args.get('museo_personaggio')
 
-  q = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
+  q = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'" + (' WHERE personaggio.nome LIKE %(data)s' if data != None and data != '' else "")
   cursor = conn.cursor(as_dict=True)
   p = {"data": f"%{data}%"}
   cursor.execute(q, p)
   data = cursor.fetchall()
 
   return jsonify(data)
-  
-@app.route('/servizio4', methods=['GET'])
-def serv4():
-  nomeartista = request.args['nomeartista']
-  cognomeartista = request.args['cognomeartista']
-  query = f"select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{nomeartista}' and artista.cognome ='{cognomeartista}' group by museo.nome, museo.citta, museo.paese having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{nomeartista}' and artista.cognome ='{cognomeartista}' group by museo.nome, museo.citta, museo.paese) as tot)"
-  df4 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua4 = df4)
 
-@app.route('/api/musei', methods=['GET'])
-def get_musei2():
+  #visualizzazione museo che mostra più opere di un'artista specifico4.visualizzazione museo che mostra più opere di un'artista specifico
+@app.route('/servizio4', methods=['GET'])
+#def serv4():
+#nomeartista = request.args['nomeartista']
+#cognomeartista = request.args['cognomeartista']
+#query = f"select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{nomeartista}' and artista.cognome ='{cognomeartista}' group by museo.nome, museo.citta, museo.paese having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{nomeartista}' and artista.cognome ='{cognomeartista}' group by museo.nome, museo.citta, museo.paese) as tot)"
+#df4 = pd.read_sql(query,conn)
+#return render_template("1servizio.html", visua4 = df4)
+
+@app.route('/api/artista_musei', methods=['GET'])
+def get_artista_musei():
   artist_name = request.args.get('artist_name')
   artist_surname = request.args.get('artist_surname')
 
-  query = 'SELECT museo.nome, opera.titolo, artista.nome, artista.cognome, personaggio.nome ' \
-          'FROM museo ' \
-          'INNER JOIN opera ON museo.ID = opera.IDM ' \
-          'INNER JOIN artista ON opera.IDA = artista.id ' \
-          'INNER JOIN appartiene ON opera.id = appartiene.idO ' \
-          'INNER JOIN personaggio ON appartiene.idP = personaggio.id'
+  query = "select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome = '{artist_name}' and artista.cognome = '{artist_surname}' group by museo.nome, museo.citta, museo.paese having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome = '{artist_name}'and artista.cognome = '{artist_surname}' group by museo.nome, museo.citta, museo.paese) as tot)"
 
   if artist_name is not None and artist_name != '':
       query += f" WHERE artista.nome LIKE '%{artist_name}%'"
@@ -102,24 +98,28 @@ def get_musei2():
       query += f" AND artista.cognome LIKE '%{artist_surname}%'"
 
   cursor = conn.cursor(as_dict=True)
-  cursor.execute(query)
+  cursor.execute(query, (artist_name, artist_surname))
   data = cursor.fetchall()
 
   return jsonify(data)
 
+   
 
 
-@app.route('/servizio5', methods=['GET'])
-def serv5():
-  nomeins = request.args['nomeins']
-  cognomeins = request.args['cognomeins']
-  query = f"select nome, cognome, data_nascita, data_decesso, citta_natale, paese_natale, citta_decesso, paese_decesso from artista where nome='{nomeins}' and cognome='{cognomeins}'"
 
-  df5 = pd.read_sql(query,conn)
-  return render_template("1servizio.html", visua5 = df5)
+
+#@app.route('/servizio5', methods=['GET'])
+#def serv5():
+  #5.visualizzazione informazione di un artista inserito dall’utente
+#nomeins = request.args['nomeins']
+#cognomeins = request.args['cognomeins']
+#query = f"select nome, cognome, data_nascita, data_decesso, citta_natale, paese_natale, citta_decesso, paese_decesso from artista where nome='{nomeins}' and cognome='{cognomeins}'"
+
+ #df5 = pd.read_sql(query,conn)
+ #return render_template("1servizio.html", visua5 = df5)
 
 @app.route('/api/nomecognome_artista', methods=['GET'])
-def get_museo_personaggio2():
+def get_nomecognome_artista():
   data = request.args.get('museo_personaggio')
 
   q = f"select museo.nome, museo.citta, museo.paese from museo inner join opera on museo.id = opera.idM inner join appartiene on opera.id = appartiene.idO inner join personaggio on appartiene.idP = personaggio.id where personaggio.nome = '{data}'" + (' WHERE museo.nome LIKE %(data)s' if data != None and data != '' else "")
