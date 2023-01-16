@@ -123,7 +123,7 @@ def get_nomecognome_artista():
   nomeartista = request.args.get('museo_personaggio')
   cognomeartista =  request.args.get('museo_personaggio')
   q = f"select nome, cognome, data_nascita, data_decesso, citta_natale, paese_natale, citta_decesso, paese_decesso from artista where nome='{nomeartista}' and cognome='{cognomeartista}'"
-   if nomeartista is not None and nomeartista != '':
+  if nomeartista is not None and nomeartista != '':
       q += f" WHERE artista.nome LIKE '%{nomeartista}%'"
   if cognomeartista is not None and cognomeartista != '':
       q += f" AND artista.cognome LIKE '%{cognomeartista}%'"
