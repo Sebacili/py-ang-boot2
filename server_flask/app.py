@@ -371,7 +371,26 @@ def backend():
 def modificadesiderata():
   global entitascelta
   entitascelta = request.args['entita']
-  return render_template("modifiche.html" )
+  if entitascelta == "Museo":
+    query = "select * from museo"
+    df1 = pd.read_sql(query,conn)
+    return render_template("modifiche.html", nomicolonne = df1.columns.values[1:])
+  elif entitascelta == "Artista":
+    query = "select * from Artista"
+    df1 = pd.read_sql(query,conn)
+    return render_template("modifiche.html", nomicolonne = df1.columns.values[1:])
+  elif entitascelta == "Opera":
+    query = "select * from Opera"
+    df1 = pd.read_sql(query,conn)
+    return render_template("modifiche.html", nomicolonne = df1.columns.values[1:])
+  elif entitascelta == "Personaggio":
+    query = "select * from Personaggio"
+    df1 = pd.read_sql(query,conn)
+    return render_template("modifiche.html", nomicolonne = df1.columns.values[1:])
+  else:
+    query = "select * from utente"
+    df1 = pd.read_sql(query,conn)
+    return render_template("modifiche.html", nomicolonne = df1.columns.values[1:])
   # if entita =="Museo":
   #   return render_template("DBM.html");
   # elif entita =="Artista":
