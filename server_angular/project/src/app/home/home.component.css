@@ -1,4 +1,4 @@
-.container {
+/* .container {
     margin: auto;
     width: 60%;
     border: 3px solid #747c80;
@@ -7,7 +7,7 @@
     border-bottom: 0px;
     border-radius: 5px;
     height: 93vh;
-}
+} */
 .container__contenuto{
     display: flex;
 }

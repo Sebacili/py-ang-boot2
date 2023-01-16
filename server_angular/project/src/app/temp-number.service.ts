@@ -6,11 +6,9 @@ import { Injectable } from '@angular/core';
 
 
 export class TempNumberService {
-  public tempNum: number = 0;
-
-  constructor(private tempNumberService: TempNumberService) {
-    this.tempNum = this.tempNumberService.getTempNum();
-  }
+  private tempNum: number = 0;
+  private tempNum2: number = 0;
+  private tempNum3: number = 0;
 
   public getTempNum(): number {
     return this.tempNum;
@@ -18,5 +16,23 @@ export class TempNumberService {
 
   public setTempNum(): void {
     this.tempNum = Math.floor(Math.random() * 21);
+  }
+
+
+  public getTempNum2(): number {
+    return this.tempNum2;
+  }
+
+  public setTempNum2(): void {
+    this.tempNum2 = Math.floor(Math.random() * 10);
+  }
+
+
+  public getTempNum3(): number {
+    return this.tempNum3;
+  }
+
+  public setTempNum3(): void {
+    this.tempNum3 = Math.floor(Math.random() * 2);
   }
 }

@@ -60,10 +60,19 @@
       <!-- <button class="btn btn-outline-light my-2 my-sm-0" onclick="location.href='http://www.example.com'" type="button">login</button> -->
     </div>
   </nav>
+
+
+  
   <div>{{ tempNum }}</div>
+  <div>{{ tempNum2 }}</div>
+  <div>{{ tempNum3 }}</div>
+
+
+
   <router-outlet *ngIf="isShow"></router-outlet>
-  <app-home *ngIf="!isShow"></app-home>
- 
+  <div class="container">
+    <app-home *ngIf="!isShow"></app-home>
+  </div>
   
 
 </body>
