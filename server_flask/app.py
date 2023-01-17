@@ -510,19 +510,23 @@ def modificadesiderata():
     query = "select * from utente"
     df1 = pd.read_sql(query,conn)
     return render_template("modifiche.html", nomicolonne = df1.columns.values[1:])
-  # if entita =="Museo":
-  #   return render_template("DBM.html");
-  # elif entita =="Artista":
-  #   return render_template("DBA.html")
-  # elif entita =="Opera":
-  #   return render_template("DBO.html")
-  # elif entita =="Personaggio":
-  #   return render_template("DBP.html")
-  # else:
-  #   return render_template("DBU.html")
+
  
 
+@app.route('/backend/collaborators/modificadesiderata/AggCol', methods=['Post'])
+def AggCol():
+  global nome_colAggCol, data_typeAggCol, jsnum_AggCol
+  nome_colAggCol = request.args['nome_col']
+  data_typeAggCol = request.args['data_type']
+  jsnum_AggCol = 0
+  query = f"ALTER TABLE {entitascelta} ADD {nome_colAggCol} {data_typeAggCol};"
+  df2 = pd.read_sql(query,conn)
+  return render_template("ModEx.html", nom_col = nome_colAggCol, DT = data_typeAggCol, tab = entitascelta, jsnum = jsnum)
 
+@app.route("/backend/collaborators/modificadesiderata/AggCol/get_value")
+def AggCol_get_value():
+    x = jsnum_AggCol
+    return jsonify(x=x)
 
 
 # @app.route('/backend/collaborators/modificadesiderata/tipodimodificascelta', methods=['GET'])
