@@ -20,9 +20,9 @@ export class AppComponent implements OnInit{
     this.randomService.setTempNum();
     this.tempNum = this.randomService.getTempNum();
     this.randomService.setTempNum2();
-    this.tempNum2 = this.randomService.setTempNum2();
+    // this.tempNum2 = this.randomService.setTempNum2();
     this.randomService.setTempNum3();
-    this.tempNum3 = this.randomService.setTempNum3();
+    // this.tempNum3 = this.randomService.setTempNum3();
   }
   
  
