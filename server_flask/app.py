@@ -474,11 +474,19 @@ def serv22():
 
 
 
+@app.route('/info/post/registration', methods=['POST'])
+def registration():
+  datiutenti = request.get_json()
+  nome = datiutenti['name']
+  email = datiutenti['email']
+  passw = datiutenti['passw']
+  cursor = conn.cursor()
+  #inserimento dati in db
+  cursor.execute('insert into utente values (nome_utente, email, passw) Values (%s, %s, %s)', (nome, email, passw))
+  conn.commit()
 
-
-
-
-
+  conn.close()
+  return 'dati sono stati salvati'
 
 
 
