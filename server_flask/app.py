@@ -604,14 +604,10 @@ def InsInfo():
     nome_utente = request.args['nome_col_nome_utente']
     email = request.args['nome_col_email']
     passw = request.args['nome_col_passw']
-    
     query = f"INSERT INTO table_name (nome_utente, email, passw) VALUES ({nome_utente}, {email}, {passw});"
     df2 = pd.read_sql(query,conn)
     return render_template("InsInfoU.html", nome_utente = nome_utente, email = email, passw = passw, tab = entitascelta)
 
-
-
-  return render_template("altDTCol.html", nom_col = nome_colElCol, dt = new_dt, tab = entitascelta)
 
 
 
