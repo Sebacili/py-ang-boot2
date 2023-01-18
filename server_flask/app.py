@@ -609,6 +609,31 @@ def InsInfo():
     return render_template("InsInfoU.html", nome_utente = nome_utente, email = email, passw = passw, tab = entitascelta)
 
 
+@app.route('/backend/collaborators/modificadesiderata/AggiorInfo', methods=['Post'])
+def AggiorInfo():
+  nome_col = request.args['nome_col']
+  new_val = request.args['new_val']
+  id_row = request.args['id']
+  if new_val == int:
+    query = f"UPDATE {entitascelta} SET {nome_col} = {new_val} WHERE id = {id_row};"
+    df2 = pd.read_sql(query,conn)
+    return render_template("AggiorInfo.html", nom_col = nome_col, new_val = new_val, id_row = id_row, tab = entitascelta)
+  else:
+    query = f"UPDATE {entitascelta} SET {nome_col} = '{new_val}' WHERE id = {id_row};"
+    df2 = pd.read_sql(query,conn)
+    return render_template("AggiorInfo.html", nom_col = nome_col, new_val = new_val, id_row = id_row, tab = entitascelta)
+
+
+  
+
+@app.route('/backend/collaborators/modificadesiderata/ElInfo', methods=['Post'])
+def ElInfo():
+  nome_col = request.args['nome_col']
+  val_elim = request.args['val_elim']
+  query = f"DELETE FROM {entitascelta} WHERE {nome_col} = '{val_elim}';"
+  df2 = pd.read_sql(query,conn)
+  return render_template("ElInfo.html", nom_col = nome_col, new_val = new_val, id_row = id_row, tab = entitascelta)
+
 
 
 
