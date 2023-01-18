@@ -490,6 +490,10 @@ def registration():
 
 
 
+
+
+
+
 @app.route('/backend/collaborators', methods=['GET'])
 def backend():
   return render_template("backend.html")
@@ -523,18 +527,92 @@ def modificadesiderata():
 
 @app.route('/backend/collaborators/modificadesiderata/AggCol', methods=['Post'])
 def AggCol():
-  global nome_colAggCol, data_typeAggCol, jsnum_AggCol
   nome_colAggCol = request.args['nome_col']
   data_typeAggCol = request.args['data_type']
-  jsnum_AggCol = 0
   query = f"ALTER TABLE {entitascelta} ADD {nome_colAggCol} {data_typeAggCol};"
   df2 = pd.read_sql(query,conn)
-  return render_template("ModEx.html", nom_col = nome_colAggCol, DT = data_typeAggCol, tab = entitascelta, jsnum = jsnum)
+  return render_template("AggCol.html", nom_col = nome_colAggCol, DT = data_typeAggCol, tab = entitascelta)
 
-@app.route("/backend/collaborators/modificadesiderata/AggCol/get_value")
-def AggCol_get_value():
-    x = jsnum_AggCol
-    return jsonify(x=x)
+
+@app.route('/backend/collaborators/modificadesiderata/ElCol', methods=['Post'])
+def ElCol():
+  nome_colElCol = request.args['nome_col']
+  query = f"ALTER TABLE {entitascelta} DROP COLUMN {nome_colElCol};"
+  df2 = pd.read_sql(query,conn)
+  return render_template("ElCol.html", nom_col = nome_colElCol, tab = entitascelta)
+
+@app.route('/backend/collaborators/modificadesiderata/RinCol', methods=['Post'])
+def RinCol():
+  old_nome_col = request.args['nome_col']
+  new_nome_col = request.args['new_nome_col']
+  query = f"ALTER TABLE {entitascelta} RENAME COLUMN {old_nome_col} to {new_nome_col};"
+  df2 = pd.read_sql(query,conn)
+  return render_template("RinCol.html", nom_col = old_nome_col, new_nom_col = new_nome_col, tab = entitascelta)
+
+@app.route('/backend/collaborators/modificadesiderata/altDTCol', methods=['Post'])
+def altDTCol():
+  nome_col = request.args['nome_col']
+  new_dt = request.args['data_type']
+  query = f"ALTER TABLE {entitascelta} ALTER COLUMN {nome_col} {new_dt};"
+  df2 = pd.read_sql(query,conn)
+  return render_template("altDTCol.html", nom_col = nome_colElCol, dt = new_dt, tab = entitascelta)
+
+
+@app.route('/backend/collaborators/modificadesiderata/InsInfo', methods=['Post'])
+def InsInfo():
+  if entitascelta == "Museo":
+    nome = request.args['nome_col_nome']
+    citta  = request.args['nome_col_citta']
+    paese = request.args['nome_col_paese']
+    descrizione = request.args['nome_col_descrizione']
+    immagine = request.args['nome_col_immagine']
+    query = f"INSERT INTO table_name (nome, citta, paese, descrizione, immagine) VALUES ({nome}, {citta}, {paese}, {descrizione}, {immagine});"
+    df2 = pd.read_sql(query,conn)
+    return render_template("InsInfoM.html", nome = nome, citta = citta, paese = paese, descrizione = descrizione, immagine = immagine, tab = entitascelta)
+  elif entitascelta == "Artista":
+    nome = request.args['nome_col_nome']
+    cognome = request.args['nome_col_cognome']
+    data_nascita = request.args['nome_col_data_nascita']
+    data_decesso = request.args['nome_col_data_decesso']
+    citta_natale = request.args['nome_col_citta_natale']
+    paese_natale = request.args['nome_col_paese_natale']
+    citta_decesso = request.args['nome_col_citta_decesso']
+    paese_decesso = request.args['nome_col_paese_decesso']
+    biografia  = request.args['nome_col_biografia']
+    immagine = request.args['nome_col_immagine']
+    query = f"INSERT INTO table_name (nome, cognome, data_nascita, data_decesso, citta_natale, paese_natale, citta_decesso, paese_decesso, biografia, immagine) VALUES ({nome}, {cognome}, {data_nascita}, {data_decesso}, {citta_natale}, {paese_natale}, {citta_decesso}, {paese_decesso}, {biografia}, {immagine});"
+    df2 = pd.read_sql(query,conn)
+    return render_template("InsInfoA.html", nome = nome, cognome = cognome, data_nascita = data_nascita, data_decesso = data_decesso, citta_natale = citta_natale, paese_natale = paese_natale, citta_decesso = citta_decesso, paese_decesso = paese_decesso, biografia = biografia, immagine = immagine, tab = entitascelta)
+  elif entitascelta == "Opera":
+    IDM = request.args['nome_col_IDM']
+    IDA = request.args['nome_col_IDA']
+    titolo = request.args['nome_col_titolo']
+    tecnica = request.args['nome_col_tecnica']
+    stile = request.args['nome_col_stile']
+    data_creazione = request.args['nome_col_data_creazione']
+    descrizione = request.args['nome_col_descrizione']
+    immagine = request.args['nome_col_immagine']
+    query = f"INSERT INTO table_name (IDM, IDA, titolo, tecnica, stile, data_creazione, descrizione, immagine) VALUES ({IDM}, {IDA}, {titolo}, {tecnica}, {stile}, {data_creazione}, {descrizione}, {immagine});"
+    df2 = pd.read_sql(query,conn)
+    return render_template("InsInfoO.html", IDM = IDM, IDA = IDA, titolo = titolo, tecnica = tecnica, stile = stile, data_creazione = data_creazione, descrizione = descrizione, immagine = immagine, tab = entitascelta)
+  elif entitascelta == "Personaggio":
+    nome = request.args['nome_col_nome']
+    query = f"INSERT INTO table_name (nome) VALUES ({nome});"
+    df2 = pd.read_sql(query,conn)
+    return render_template("InsInfoP.html", nome = nome, tab = entitascelta)
+  else:
+    nome = request.args['nome_col_nome']
+    query = f"INSERT INTO table_name (nome) VALUES ({nome});"
+    df2 = pd.read_sql(query,conn)
+    return render_template("InsInfoP.html", nome = nome, tab = entitascelta)
+
+
+
+  return render_template("altDTCol.html", nom_col = nome_colElCol, dt = new_dt, tab = entitascelta)
+
+
+
+
 
 
 # @app.route('/backend/collaborators/modificadesiderata/tipodimodificascelta', methods=['GET'])
