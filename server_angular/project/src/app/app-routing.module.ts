@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { MuseiComponent } from './musei/musei.component';
 import { HomeComponent } from './home/home.component';
 import { IntroGuideComponent } from './intro-guide/intro-guide.component';
+import { PrimservoperaComponent } from './primservopera/primservopera.component';
 
 const routes: Routes = [
   {path: '', redirectTo : 'homepage', pathMatch : 'full'},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'login' , component: LoginComponent},
   {path:'homepage' , component: HomeComponent},
   {path:'musei' , component: MuseiComponent},
-  {path:'intro-guide' , component: IntroGuideComponent}
+  {path:'intro-guide' , component: IntroGuideComponent},
+  {path:'primservopera' , component: PrimservoperaComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

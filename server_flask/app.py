@@ -22,6 +22,13 @@ def home():
 # df1 = pd.read_sql(query,conn)
 # return jsonify(df1)
 
+
+
+
+
+
+
+
 # Ritorna la lista dei musei 
 @app.route('/api/musei', methods=['GET'])
 def get_musei():
@@ -34,6 +41,13 @@ def get_musei():
   data = cursor.fetchall()
 
   return jsonify(data)
+
+
+
+
+
+
+
 # Ritorna personaggi
 #@app.route('/servizio2', methods=['GET'])
 #ef serv2():
