@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MuseiComponent } from './musei/musei.component';
 import { PersonaggiComponent } from './personaggi/personaggi.component';
 import { HttpClientModule } from '@angular/common/http';
+import { IntroGuideComponent } from './intro-guide/intro-guide.component';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     LoginComponent,
     MuseiComponent,
-    PersonaggiComponent
+    PersonaggiComponent,
+    IntroGuideComponent
   ],
   imports: [
     BrowserModule,
