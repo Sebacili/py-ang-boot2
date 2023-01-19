@@ -7,10 +7,10 @@
 
 <body style="height: 100%;">
     
-    <nav class="navbar navbar-dark bg-dark justify-content-between" style="margin-bottom: 8px;" *ngIf="!isShow">
-      <a class="navbar-brand" style="margin-left: 20px;" routerlink="/intro_guide">
+    <nav class="navbar navbar-dark bg-dark justify-content-between" style="margin-bottom: 8px;">
+      <button class="navbar-brand" style="margin-left: 20px; background-color: inherit; border: none;" routerlink="/intro-guide">
         <!-- <img src="assets/images/Logo.jpg"  width="120" height="120"> -->Fine Arts
-        </a>
+      </button>
       <div class="btn-group">
   
   
@@ -62,7 +62,7 @@
   
   
       <!-- </div> -->
-      <div class="form-inline ">
+    <div class="form-inline">
         <button class="btn btn-outline-light my-2 my-sm-0" style="margin-right: 20px;" routerLink="/register"
           (click)=toggleDisplay()>Sign up / login</button>
         <!-- <button class="btn btn-outline-light my-2 my-sm-0" onclick="location.href='http://www.example.com'" type="button">login</button> -->
