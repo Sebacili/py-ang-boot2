@@ -11,5 +11,5 @@ export class HomeComponent {
   toggleDisplay() {
     this.isShow = !this.isShow;
   }
-
+  
 }

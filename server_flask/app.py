@@ -765,6 +765,16 @@ def login():
 
 
 
+# for a dynamic home
+@app.route('/api/dynamicHome/opera', methods=['get'])
+def dynamicHome():
+  data = 5
+  # data = request.args.get("randnum1")
+  q = f'select opera.id, opera.titolo, opera.descrizione, opera.immagine from opera where id = {data}' 
+  df = pd.read_sql(q, conn)
+  res = list(df.fillna("NaN").to_dict("index").values())    # list(df.to_dict("index").values())
+  return jsonify(res)
+
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3245, debug=True)
