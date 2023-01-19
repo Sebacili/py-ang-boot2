@@ -696,7 +696,7 @@ def register():
     if not user_exists(user_params["email"]):
       # Inserisco l'utente nel database
       cursor = conn.cursor(as_dict=True)
-      q = 'INSERT INTO users (nome_ut, email, password) VALUES (%(nome_ut)s, %(email)s, %(password)s)'
+      q = 'INSERT INTO utente (nome_ut, email, password) VALUES (%(nome_ut)s, %(email)s, %(password)s)'
       cursor.execute(q, params=user_params)
       conn.commit()
 
@@ -709,6 +709,43 @@ def register():
     data["statusCode"] = 400
     data["errorMessage"] = 'Missing values in the request'
 
+  return jsonify(data)
+
+
+@app.route('/api/login', methods=['POST'])
+def login():
+  # Prendo gli argomenti richiesti
+  email = request.args.get('email')
+  password = request.args.get('password')
+  nome_ut = request.args.get('nome_ut')
+
+  data = {
+    "statusCode": 200,
+    "errorMessage": "",
+    "data": {}
+  }
+
+  # Controllo se nono stati passati tutti i parametri richiesti
+  if None not in [email, password, nome_ut]:
+    # Prendo le informazioni dell'utente
+    q = 'SELECT * FROM utente WHERE email = %(e)s and nome_ut = %(n)s'
+    cursor = conn.cursor(as_dict=True)
+    cursor.execute(q, params={"e": email, "n": nome_ut})
+    res = cursor.fetchall()
+
+    # Controllo se l'utente esiste
+    if len(res) < 1:
+      data["statusCode"] = 404
+      data["errorMessage"] = "No user was found with that email"
+    elif not (res[0]["password"] == password):
+      data["statusCode"] = 403
+      data["errorMessage"] = "Wrong password"
+    else:
+      data["data"] = res
+  else:
+    data['statusCode'] = 400
+    data['errorMessage'] = "No email or password provided"
+  
   return jsonify(data)
 
 
