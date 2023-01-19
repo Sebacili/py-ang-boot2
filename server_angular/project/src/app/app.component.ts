@@ -8,7 +8,7 @@ import { TempNumberService } from './temp-number.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  tempNum :  number = 0;
+  public tempNum :  number = 0;
   tempNum2 :  number = 0;
   tempNum3 :  number = 0;
   title = 'project';

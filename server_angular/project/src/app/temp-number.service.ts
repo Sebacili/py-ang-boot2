@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 
@@ -15,7 +15,7 @@ export class TempNumberService {
   }
 
   public setTempNum(): void {
-    this.tempNum = Math.floor(Math.random() * 21);
+    this.tempNum = Math.floor(Math.random() * 12);
   }
 
 
