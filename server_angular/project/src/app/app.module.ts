@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MuseiComponent } from './musei/musei.component';
 import { PersonaggiComponent } from './personaggi/personaggi.component';
+import { HttpClientModule } from '@angular/common/http';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PersonaggiComponent } from './personaggi/personaggi.component';
     BrowserModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(),
+    HttpClientModule
     // HttpClientModule
 
   ],
