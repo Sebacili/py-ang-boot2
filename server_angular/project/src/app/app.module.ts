@@ -26,7 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     HttpClientModule
-    // HttpClientModule
 
   ],
   providers: [],
