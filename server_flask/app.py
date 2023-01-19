@@ -656,6 +656,61 @@ def ElInfo():
 
 
 
+# Funzione per controllare se l'email delll'utente e' presente nel Database
+def user_exists(email):
+  q = 'SELECT * FROM users WHERE email = %(e)s'
+  cursor = conn.cursor(as_dict=True)
+  cursor.execute(q, params={"e": email})
+  res = cursor.fetchall()
+  if len(res) < 1:
+    return False
+  return True
+
+def get_user(email):
+  q = 'SELECT * FROM users WHERE email = %(email)s'
+  cursor = conn.cursor(as_dict=True)
+  cursor.execute(q, params={"email": email})
+  res = cursor.fetchall()
+  return res
+
+
+
+@app.route('/api/register', methods=['POST'])
+def register():
+  user_params = {
+    "email": request.args.get('email'),
+    "nome_ut": request.args.get('nome_ut'),
+    "password": request.args.get('password'),
+    "reppassw": request.args.get('reppassw'),
+  }
+
+  data = {
+    "statusCode": 200,
+    "errorMessage": "",
+    "data": {}
+  }
+
+  # Controllo se tutti i parametri sono stati inseriti nella richiesta
+  if None not in [*user_params.values()]:
+    # Controllo se l'utente esiste gia'
+    if not user_exists(user_params["email"]):
+      # Inserisco l'utente nel database
+      cursor = conn.cursor(as_dict=True)
+      q = 'INSERT INTO users (nome_ut, email, password) VALUES (%(nome_ut)s, %(email)s, %(password)s)'
+      cursor.execute(q, params=user_params)
+      conn.commit()
+
+      # Restituisco l'utente
+      data["data"] = get_user(user_params['email'])
+    else:
+      data["statusCode"] = 403
+      data["errorMessage"] = "User already exists"
+  else:
+    data["statusCode"] = 400
+    data["errorMessage"] = 'Missing values in the request'
+
+  return jsonify(data)
+
 
 
 

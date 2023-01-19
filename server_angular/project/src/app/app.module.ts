@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MuseiComponent } from './musei/musei.component';
@@ -21,13 +22,16 @@ import { IntroGuideComponent } from './intro-guide/intro-guide.component';
     LoginComponent,
     MuseiComponent,
     PersonaggiComponent,
-    IntroGuideComponent
+    IntroGuideComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [],
