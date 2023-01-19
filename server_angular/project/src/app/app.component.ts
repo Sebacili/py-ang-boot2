@@ -25,10 +25,7 @@ export class AppComponent implements OnInit{
     // this.tempNum3 = this.randomService.setTempNum3();
   }
   
- 
-  toggleDisplay() {
-    this.isShow = !this.isShow;
-  }
+
 
 
 

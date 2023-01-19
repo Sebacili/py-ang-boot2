@@ -1,67 +1,6 @@
-
-<body style="height: 100%;">
+<router-outlet></router-outlet>
+<!-- <body style="height: 100%;"> -->
   <!-- nav header-->
-  <nav class="navbar navbar-dark bg-dark justify-content-between" style="margin-bottom: 8px;" *ngIf="!isShow">
-    <a class="navbar-brand" style="margin-left: 20px;" href="http://www.example.com">
-      <!-- <img src="assets/images/Logo.jpg"  width="120" height="120"> -->Fine Arts
-      </a>
-    <div class="btn-group">
-
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main_nav">
-          <ul class="navbar-nav">
-
-            <li class="nav-item dropdown" id="myDropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Museo  </a>
-              <ul class="dropdown-menu">
-                <li> <a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 2 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown" id="myDropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  opera  </a>
-              <ul class="dropdown-menu">
-                <li> <a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 2 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown" id="myDropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  artista  </a>
-              <ul class="dropdown-menu">
-                <li> <a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 2 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown" id="myDropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Personaggi  </a>
-              <ul class="dropdown-menu">
-                <li> <a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 2 </a></li>
-                <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-
-
-    <!-- </div> -->
-    <div class="form-inline ">
-      <button class="btn btn-outline-light my-2 my-sm-0" style="margin-right: 20px;" routerLink="/register"
-        (click)=toggleDisplay()>Sign up / login</button>
-      <!-- <button class="btn btn-outline-light my-2 my-sm-0" onclick="location.href='http://www.example.com'" type="button">login</button> -->
-    </div>
-  </nav>
 
 
   <!-- visualizzare num random -->
@@ -69,13 +8,10 @@
   <div>{{ tempNum2 }}</div>
   <div>{{ tempNum3 }}</div> -->
 
-  <app-musei></app-musei>
+  <!-- <router-outlet></router-outlet> -->
 
-  <router-outlet *ngIf="isShow"></router-outlet>
-  <div class="container">
+  <!-- <div class="container">
     <app-home *ngIf="!isShow"></app-home>
-  </div>
-<app-musei></app-musei>
-  
+  </div> -->
 
-</body>
+<!-- </body> -->

@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  isShow = false;
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
 
 }
