@@ -91,7 +91,7 @@ def get_museo_personaggio():
   return jsonify(data)
 
   #visualizzazione museo che mostra più opere di un'artista specifico4.visualizzazione museo che mostra più opere di un'artista specifico
-@app.route('/servizio4', methods=['GET'])
+# @app.route('/servizio4', methods=['GET'])
 #def serv4():
 #nomeartista = request.args['nomeartista']
 #cognomeartista = request.args['cognomeartista']
@@ -174,15 +174,16 @@ def get_artisti():
  #return render_template("1servizio.html", visua7 = df7)
 
 
+#ritorna i musei che contiene più opere create con una tecnica specifica scelta dall’utente 
 @app.route('/api/tecnica_museo', methods=['GET'])
 def get_tecnica_museo():
-  data = request.args.get('tecnicascelta')
+  data = request.form.get('idk')
+  # data = 'olio su tela'
 
-  q = f"select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile) as tot)" + (' WHERE artista.nome LIKE %(data)s' if data != None and data != '' else "")
-  cursor = conn.cursor(as_dict=True)
-  p = {"data": f"%{data}%"}
-  cursor.execute(q, p)
-  data = cursor.fetchall()
+  q = f"select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile) as tot)"
+  df = pd.read_sql(q, conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
 
 #@app.route('/servizio8', methods=['GET'])
 #def serv8():
