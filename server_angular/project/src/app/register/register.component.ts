@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     });
 
     // Eseguo la richiesta in POST
-    this.http.post<Data>('http://0.0.0.0:3245/api/register', '', {
+    this.http.post<Data>('http://127.0.0.1:3245/api/register', '', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
