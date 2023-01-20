@@ -177,7 +177,7 @@ def get_artisti():
 #ritorna i musei che contiene più opere create con una tecnica specifica scelta dall’utente 
 @app.route('/api/tecnica_museo', methods=['GET'])
 def get_tecnica_museo():
-  data = request.form.get('idk')
+  data = request.form.get('tecnica')
   # data = 'olio su tela'
 
   q = f"select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile) as tot)"

@@ -1,40 +1,11 @@
-<!-- <div class="container-fluid">
-    <input #box (keydown)="onKey(box.value)" class="form-control mt-3 mb-3">
-    <p *ngIf="loading">LOADING...</p>
-  
-    <table *ngIf="!loading && staffs.length >= 1" class="table table-striped">
-      <thead>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Active</th>
-        <th>Store ID</th>
-        <th>Manager ID</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let s of staffs">
-          <td>{{ s.staff_id }}</td>
-          <td>{{ s.first_name }}</td>
-          <td>{{ s.last_name }}</td>
-          <td>{{ s.email }}</td>
-          <td>{{ s.phone }}</td>
-          <td>{{ s.active }}</td>
-          <td>{{ s.store_id }}</td>
-          <td>{{ s.manager_id }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="alert alert-danger" *ngIf="staffs.length < 1">Error, no staff found in this store</div>
-  </div> -->
+<!-- https://github.com/CappuCitti/SQL-appunti/blob/main/NgFlaskJSON/NgServer/src/app/app.component.html -->
 
   <h1>hope it owrks</h1>
 
 
-  <form action="https://3245-lukebasco121-pyangboot2-vyccinqvxv1.ws-eu83.gitpod.io/api/tecnica_museo" method="get" >
+  <form [formGroup]="form" (ngSubmit)="submit()" >
     <div class="form-outline mb-4">
-      <input type="text"  class="form-control form-control-lg" placeholder="inserisci tecnica" name = "idk" required/>
+      <input type="text"  class="form-control form-control-lg" placeholder="inserisci tecnica es. olio su tela" name = "tecnica" required/>
     </div>
     <div class="d-flex justify-content-center">
       <input type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="cerca">
@@ -46,3 +17,4 @@
 {{paese}}
 {{tot_opere}} -->
 
+{{ mydata | json }}

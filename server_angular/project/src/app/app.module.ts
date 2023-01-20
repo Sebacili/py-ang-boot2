@@ -14,6 +14,7 @@ import { PersonaggiComponent } from './personaggi/personaggi.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IntroGuideComponent } from './intro-guide/intro-guide.component';
 import { PrimservoperaComponent } from './primservopera/primservopera.component';
+import { PrimservoperaService } from 'src/services/primservopera.service';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -36,7 +37,10 @@ import { PrimservoperaComponent } from './primservopera/primservopera.component'
     ReactiveFormsModule
 
   ],
-  providers: [],
+  ////////////////
+  // for retreiving data from py
+  providers: [PrimservoperaService],
+  ///////////////
   bootstrap: [AppComponent]
 })
 export class AppModule { }
