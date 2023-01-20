@@ -76,6 +76,8 @@ def get_personaggi():
 #df3 = pd.read_sql(query,conn)
 #return render_template("1servizio.html", visua3 = df3)
 #
+
+
 #visualizzare museo inserendo personaggio
 
 @app.route('/api/museo_personaggio', methods=['GET'])
@@ -90,7 +92,7 @@ def get_museo_personaggio():
 
   return jsonify(data)
 
-  #visualizzazione museo che mostra più opere di un'artista specifico4.visualizzazione museo che mostra più opere di un'artista specifico
+  #visualizzazione museo che mostra più opere di un'artista specifico
 # @app.route('/servizio4', methods=['GET'])
 #def serv4():
 #nomeartista = request.args['nomeartista']
@@ -99,23 +101,23 @@ def get_museo_personaggio():
 #df4 = pd.read_sql(query,conn)
 #return render_template("1servizio.html", visua4 = df4)
 
+
+
+
+
+  #visualizzazione museo che mostra più opere di un'artista specifico
 @app.route('/api/artista_musei', methods=['GET'])
 def get_artista_musei():
-  artist_name = request.args.get('artist_name')
-  artist_surname = request.args.get('artist_surname')
+  # artist_name = request.args.get('artist_name')
+  # artist_surname = request.args.get('artist_surname')
 
-  query = "select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome = '{artist_name}' and artista.cognome = '{artist_surname}' group by museo.nome, museo.citta, museo.paese having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome = '{artist_name}'and artista.cognome = '{artist_surname}' group by museo.nome, museo.citta, museo.paese) as tot)"
+  artist_name = 'Vincent Willem'
+  artist_surname = 'Van Gogh'
 
-  if artist_name is not None and artist_name != '':
-      query += f" WHERE artista.nome LIKE '%{artist_name}%'"
-  if artist_surname is not None and artist_surname != '':
-      query += f" AND artista.cognome LIKE '%{artist_surname}%'"
-
-  cursor = conn.cursor(as_dict=True)
-  cursor.execute(query, (artist_name, artist_surname))
-  data = cursor.fetchall()
-
-  return jsonify(data)
+  q = f"select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{artist_name}' and artista.cognome ='{artist_surname}' group by museo.nome, museo.citta, museo.paese having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{artist_name}' and artista.cognome ='{artist_surname}' group by museo.nome, museo.citta, museo.paese) as tot)"
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
 
    
 
@@ -174,6 +176,9 @@ def get_artisti():
  #return render_template("1servizio.html", visua7 = df7)
 
 
+
+###################
+
 #ritorna i musei che contiene più opere create con una tecnica specifica scelta dall’utente 
 @app.route('/api/tecnica_museo', methods=["GET", "POST"])
 def get_tecnica_museo():
@@ -184,6 +189,9 @@ def get_tecnica_museo():
   df = pd.read_sql(q, conn)
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
+
+####################
+
 
 #@app.route('/servizio8', methods=['GET'])
 #def serv8():
