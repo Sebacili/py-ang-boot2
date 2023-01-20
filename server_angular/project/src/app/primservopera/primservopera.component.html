@@ -3,18 +3,22 @@
   <h1>hope it owrks</h1>
 
 
-  <form [formGroup]="form" (ngSubmit)="submit()" >
+  <form>
     <div class="form-outline mb-4">
-      <input type="text"  class="form-control form-control-lg" placeholder="inserisci tecnica es. olio su tela" name = "tecnica" required/>
+      <input #t [(ngModel)]="tecnica" class="form-control form-control-lg" placeholder="inserisci tecnica es. olio su tela" name = "tecnica" required/>
     </div>
     <div class="d-flex justify-content-center">
-      <input type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="cerca">
+      <button (click)="onClick(t)"> cerca </button>
+      <!-- <button (click)="onClick(t)" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"> Cerca </button> -->
     </div>
   </form>
 
+
+  
 <!-- {{citta}}
 {{nome}}
 {{paese}}
 {{tot_opere}} -->
 
-{{ mydata | json }}
+{{ dati | json }}
+{{tecnica}}
