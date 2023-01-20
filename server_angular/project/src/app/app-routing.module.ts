@@ -7,6 +7,7 @@ import { MuseiComponent } from './musei/musei.component';
 import { HomeComponent } from './home/home.component';
 import { IntroGuideComponent } from './intro-guide/intro-guide.component';
 import { PrimservoperaComponent } from './primservopera/primservopera.component';
+import { SecservoperaComponent } from './secservopera/secservopera.component';
 
 const routes: Routes = [
   {path: '', redirectTo : 'homepage', pathMatch : 'full'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'homepage' , component: HomeComponent},
   {path:'musei' , component: MuseiComponent},
   {path:'intro-guide' , component: IntroGuideComponent},
-  {path:'primservopera' , component: PrimservoperaComponent}
+  {path:'primservopera' , component: PrimservoperaComponent},
+  {path:'secservopera' , component: SecservoperaComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

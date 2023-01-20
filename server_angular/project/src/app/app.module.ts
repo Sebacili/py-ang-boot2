@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { IntroGuideComponent } from './intro-guide/intro-guide.component';
 import { PrimservoperaComponent } from './primservopera/primservopera.component';
 import { PrimservoperaService } from 'src/services/primservopera.service';
+import { SecservoperaComponent } from './secservopera/secservopera.component';
+import { SecservoperaService } from 'src/services/secservopera.service';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { PrimservoperaService } from 'src/services/primservopera.service';
     PersonaggiComponent,
     IntroGuideComponent,
     PrimservoperaComponent,
+    SecservoperaComponent,
     
   ],
   imports: [
@@ -39,7 +42,7 @@ import { PrimservoperaService } from 'src/services/primservopera.service';
   ],
   ////////////////
   // for retreiving data from py
-  providers: [PrimservoperaService],
+  providers: [PrimservoperaService,SecservoperaService],
   ///////////////
   bootstrap: [AppComponent]
 })

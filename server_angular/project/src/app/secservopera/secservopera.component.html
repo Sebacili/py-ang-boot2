@@ -1,0 +1,18 @@
+<p>secservopera works!</p>
+
+
+  <form>
+      <div class="form-outline mb-4">
+        <input #n [(ngModel)]="nome_artista" class="form-control form-control-lg" placeholder="inserisci nome artista es. Vincent Willem" name = "nome_artista" required/>
+      </div>
+      <div class="form-outline mb-4">
+        <input #c [(ngModel)]="cognome_artista" class="form-control form-control-lg" placeholder="inserisci artista es. Van Gogh" name = "cognome_artista" required/>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button (click)="onClick(n,c)"> cerca </button>
+        <!-- <button (click)="onClick(t)" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"> Cerca </button> -->
+      </div>
+  </form>
+
+
+{{ dati | json }}
