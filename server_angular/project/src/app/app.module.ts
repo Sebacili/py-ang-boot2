@@ -19,6 +19,8 @@ import { SecservoperaComponent } from './secservopera/secservopera.component';
 import { SecservoperaService } from 'src/services/secservopera.service';
 import { OperaPersonaggiComponent } from './opera-personaggi/opera-personaggi.component';
 import { OperapersonaggiService } from 'src/services/operapersonaggi.service';
+import { OperaTitoloComponent } from './opera-titolo/opera-titolo.component';
+import { OperatitoloService } from 'src/services/operatitolo.service';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { OperapersonaggiService } from 'src/services/operapersonaggi.service';
     PrimservoperaComponent,
     SecservoperaComponent,
     OperaPersonaggiComponent,
+    OperaTitoloComponent,
     
   ],
   imports: [
@@ -45,7 +48,7 @@ import { OperapersonaggiService } from 'src/services/operapersonaggi.service';
   ],
   ////////////////
   // for retreiving data from py
-  providers: [PrimservoperaService,SecservoperaService, OperapersonaggiService],
+  providers: [PrimservoperaService,SecservoperaService, OperapersonaggiService, OperatitoloService],
   ///////////////
   bootstrap: [AppComponent]
 })

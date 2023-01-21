@@ -10,6 +10,7 @@ import { PrimservoperaComponent } from './primservopera/primservopera.component'
 import { SecservoperaComponent } from './secservopera/secservopera.component';
 import { PersonaggiComponent } from './personaggi/personaggi.component';
 import { OperaPersonaggiComponent } from './opera-personaggi/opera-personaggi.component';
+import { OperaTitoloComponent } from './opera-titolo/opera-titolo.component';
 
 const routes: Routes = [
   {path: '', redirectTo : 'homepage', pathMatch : 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'secservopera' , component: SecservoperaComponent},
   {path:'personaggio' , component: PersonaggiComponent},
   {path:'operapersonaggi' , component: OperaPersonaggiComponent},
+  {path:'operatitolo' , component: OperaTitoloComponent},
 
 ];
 @NgModule({

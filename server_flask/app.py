@@ -24,11 +24,6 @@ def home():
 
 
 
-
-
-
-
-
 # Ritorna la lista dei musei 
 @app.route('/api/musei', methods=['GET'])
 def get_musei():
@@ -47,28 +42,33 @@ def get_musei():
 
 
 
-
-# Ritorna personaggi
-#@app.route('/servizio2', methods=['GET'])
-#ef serv2():
-# personaggi = request.args['personaggi']
-# query = f"select nome from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where titolo = '{personaggi}'"
-# df2 = pd.read_sql(query,conn)
-# return render_template("1servizio.html", visua2 = df2)
-
-
-
-
-
 ####################
 
 # Ritorna personaggi
 @app.route('/api/personaggi', methods=['GET', "POST"])
 def get_personaggi():
-  # personaggio = request.args.get('personaggio')
-  personaggio = 'Venere'
+  personaggio = request.args.get('personaggi')
+  # personaggio = 'Giacomo maggiore'
 
-  q = f"select personaggio.nome, opera.titolo, opera.immagine from opera inner join appartiene on opera.id = appartiene.idO inner join personaggio on personaggio.id = appartiene.idP where Personaggio.nome = '{personaggio}'" 
+  q = f"select Personaggio.nome, opera.titolo, opera.immagine from opera inner join appartiene on opera.id = appartiene.idO inner join Personaggio on Personaggio.id = appartiene.idP where Personaggio.nome = '{personaggio}'" 
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
+
+#####################
+
+
+
+
+#####################
+
+# Visualizzazione personaggi in cui compaiono in un'opera specifica, inserita dall'utente
+@app.route('/api/opera_personaggi', methods=['GET', "POST"])
+def opera_personaggi():
+  opera = request.args.get('opera')
+  # opera = 'Cena in Emmaus'
+
+  q = f"select personaggio.nome, opera.titolo, opera.tecnica, opera.data_creazione,opera.immagine from Personaggio inner join Appartiene on Personaggio.id = Appartiene.idP inner join opera on Appartiene.idO = Opera.id where titolo = '{opera}'" 
   df = pd.read_sql(q,conn)
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
@@ -79,16 +79,21 @@ def get_personaggi():
 
 
 
-# Visualizzazione personaggi in cui compaiono in un'opera specifica, inserita dall'utente
-@app.route('/api/opera_personaggi', methods=['GET', "POST"])
-def opera_personaggi():
-  opera = request.args.get('opera')
-  # opera = 'Cena in Emmaus'
+#####################
 
-  q = f"select personaggio.nome, opera.titolo, opera.tecnica, opera.data_creazione,opera.immagine from Personaggio inner join Appartiene on Personaggio.id = Appartiene.idP inner join opera on Appartiene.idO = Opera.id where titolo = 'Cena in Emmaus'" 
+# Visualizzazione opera specifica
+@app.route('/api/opera_titolo', methods=['GET', "POST"])
+def opera_titolo():
+  titolo = request.args.get('titolo')
+  # titolo = 'La Velata'
+
+  q = f"select * from opera where titolo = '{titolo}'" 
   df = pd.read_sql(q,conn)
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
+
+#####################
+
 
 
 
