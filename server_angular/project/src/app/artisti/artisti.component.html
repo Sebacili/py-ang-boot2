@@ -1,0 +1,22 @@
+<h1>Tutti gli artisti presenti nel db</h1>
+
+
+<br>
+<br>
+
+  <!-- Source -->
+<div class="card flex-row" *ngFor="let data of dati">
+    <img class="card-img-left example-card-img-responsive" style="min-width: 350px; min-height: 350px;" [src]="data.immagine"/>
+    <div class="card-body">
+      <h4 class="card-title h5 h4-sm"> Nome: {{ data.Nome }}</h4>
+      <p class="card-text"> Cognome: {{ data.cognome }}</p>
+      <p class="card-text"> Citta decesso: {{ data.citta_decesso }}</p>
+      <p class="card-text"> Citta natale: {{ data.citta_natale }}</p>
+      <p class="card-text"> Data decesso: {{ data.data_decesso }}</p>
+      <p class="card-text"> Data nascita: {{ data.data_nascita }}</p>
+      <p class="card-text"> Paese decesso: {{ data.paese_decesso }}</p>
+      <p class="card-text"> Paese natale: {{ data.paese_natale }}</p>
+      <p class="card-text"> Biografia: {{ data.biografia }}</p>
+    </div>
+
+</div>

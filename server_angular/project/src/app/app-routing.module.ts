@@ -11,6 +11,7 @@ import { SecservoperaComponent } from './secservopera/secservopera.component';
 import { PersonaggiComponent } from './personaggi/personaggi.component';
 import { OperaPersonaggiComponent } from './opera-personaggi/opera-personaggi.component';
 import { OperaTitoloComponent } from './opera-titolo/opera-titolo.component';
+import { ArtistiComponent } from './artisti/artisti.component';
 
 const routes: Routes = [
   {path: '', redirectTo : 'homepage', pathMatch : 'full'},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path:'personaggio' , component: PersonaggiComponent},
   {path:'operapersonaggi' , component: OperaPersonaggiComponent},
   {path:'operatitolo' , component: OperaTitoloComponent},
+  {path:'artisti' , component: ArtistiComponent},
 
 ];
 @NgModule({
