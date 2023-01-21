@@ -99,6 +99,24 @@ def opera_titolo():
 
 
 
+#####################
+
+# Visualizzazione tutti gli info di tutti gli artisti
+@app.route('/api/artisti', methods=['GET', "POST"])
+def artisti():
+
+  q = f"select * from artista" 
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
+
+#####################
+
+
+
+
+
+
 #visualizzare museo
 #@app.route('/servizio3', methods=['GET'])
 #def serv3():
@@ -179,17 +197,6 @@ def get_nomecognome_artista():
 # df6 = pd.read_sql(query,conn)
 # return render_template("1servizio.html", visua6 = df6)
 
-@app.route('/api/artisti', methods=['GET'])
-def get_artisti():
-  data = request.args.get('artisti')
-
-  q = 'select * from artista' + (' WHERE artista.nome LIKE %(data)s' if data != None and data != '' else "")
-  cursor = conn.cursor(as_dict=True)
-  p = {"data": f"%{data}%"}
-  cursor.execute(q, p)
-  data = cursor.fetchall()
-
-  return jsonify(data)
 
 
 
