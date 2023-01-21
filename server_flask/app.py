@@ -103,7 +103,7 @@ def get_museo_personaggio():
 
 
 
-
+#########################
 
   #visualizzazione museo che mostra più opere di un'artista specifico
 @app.route('/api/artista_musei', methods=["GET", "POST"])
@@ -114,12 +114,12 @@ def get_artista_musei():
   # artist_name = 'Vincent Willem'
   # artist_surname = 'Van Gogh'
 
-  q = f"select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{artist_name}' and artista.cognome ='{artist_surname}' group by museo.nome, museo.citta, museo.paese having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{artist_name}' and artista.cognome ='{artist_surname}' group by museo.nome, museo.citta, museo.paese) as tot)"
+  q = f"select museo.nome, museo.citta, museo.paese, museo.immagine, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{artist_name}' and artista.cognome ='{artist_surname}' group by museo.nome, museo.citta, museo.paese, museo.immagine having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, museo.immagine, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM inner join artista on opera.idA = artista.id where artista.nome ='{artist_name}' and artista.cognome ='{artist_surname}' group by museo.nome, museo.citta, museo.paese, museo.immagine) as tot)"
   df = pd.read_sql(q,conn)
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
 
-   
+ ########################
 
 
 
