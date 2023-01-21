@@ -105,7 +105,7 @@ def opera_titolo():
 @app.route('/api/artisti', methods=['GET', "POST"])
 def artisti():
 
-  q = f"select * from artista" 
+  q = "select * from artista" 
   df = pd.read_sql(q,conn)
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
@@ -134,6 +134,20 @@ def anno_data_artisti():
 
 
 
+
+
+#####################
+
+# Visualizzazione tutti gli info di tutti gli artisti
+@app.route('/api/elencopersonaggi', methods=['GET', "POST"])
+def elencopersonaggi():
+
+  q = "select * from personaggio" 
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
+
+#####################
 
 
 
