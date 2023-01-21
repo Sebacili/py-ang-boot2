@@ -16,15 +16,15 @@ export class PersonaggiComponent implements OnInit{
   dati: datapersonaggi[] = [];
   personaggi: string ='';
   // save value
-  onClick(t: HTMLInputElement ) 
+  onClick(p: HTMLInputElement ) 
   {
-    this.personaggi = (t.value);
+    this.personaggi = (p.value);
     this.sendData(this.personaggi);
     return false;
   }
 
-  sendData(tecnica: string) { let body: HttpParams = new HttpParams().appendAll({tecnica : tecnica})
-    this.http.post<datapersonaggi[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/tecnica_museo','',{
+  sendData(personaggi: string) { let body: HttpParams = new HttpParams().appendAll({personaggi : personaggi})
+    this.http.post<datapersonaggi[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/personaggi','',{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),

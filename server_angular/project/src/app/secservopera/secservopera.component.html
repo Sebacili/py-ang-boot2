@@ -1,5 +1,6 @@
-<p>secservopera works!</p>
+<h1>visualizzazione museo che mostra più opere di un&#39;artista specifico</h1>
 
+<br>
 
   <form>
       <div class="form-outline mb-4">
@@ -15,4 +16,19 @@
   </form>
 
 
-{{ dati | json }}
+<br>
+<br>
+<br>
+<br>
+
+<div style="display: flex;">
+  <div class="card col-xl-3" style="width: 18rem; margin-left: 5px; margin-right: 5px;" *ngFor="let data of dati">
+    <img class="card-img-top" [src]="data.immagine" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-text">{{data.citta}}</h5>
+      <p class="card-text">{{data.nome}}</p>
+      <p class="card-text">{{data.paese}}</p>
+      <p class="card-text">{{data.tot_opere}}</p>
+    </div>
+  </div>
+</div>
