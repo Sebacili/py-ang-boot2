@@ -185,7 +185,7 @@ def get_tecnica_museo():
   data = request.args.get('tecnica')
   # data = 'olio su tela'
 
-  q = f"select museo.nome, museo.citta, museo.paese, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, opera.titolo, opera.data_creazione, opera.stile) as tot)"
+  q = f"select DISTINCT museo.nome, museo.citta, museo.paese, museo.immagine, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, museo.immagine, opera.titolo, opera.data_creazione, opera.stile having count(titolo) = (select max(tot_opere) from (select museo.nome, museo.citta, museo.paese, museo.immagine, opera.titolo, opera.data_creazione, opera.stile, count(titolo) as tot_opere from museo inner join opera on museo.id = opera.idM where tecnica ='{data}' group by museo.nome, museo.citta, museo.paese, museo.immagine, opera.titolo, opera.data_creazione, opera.stile) as tot)"
   df = pd.read_sql(q, conn)
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
