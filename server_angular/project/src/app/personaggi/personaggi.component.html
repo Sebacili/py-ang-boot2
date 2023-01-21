@@ -1,1 +1,15 @@
-<p>personaggi works!</p>
+
+<h1>hope it works</h1>
+
+
+<form>
+  <div class="form-outline mb-4">
+    <input #t [(ngModel)]="personaggi" class="form-control form-control-lg" placeholder="inserisci nome opera per visualizzare i personaggi di quell' opera" name = "personaggi" required/>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button (click)="onClick(t)"> cerca </button>
+    <!-- <button (click)="onClick(t)" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"> Cerca </button> -->
+  </div>
+</form>
+{{ dati | json }}
+{{personaggi}}
