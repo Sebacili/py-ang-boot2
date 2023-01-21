@@ -9,6 +9,7 @@ import { IntroGuideComponent } from './intro-guide/intro-guide.component';
 import { PrimservoperaComponent } from './primservopera/primservopera.component';
 import { SecservoperaComponent } from './secservopera/secservopera.component';
 import { PersonaggiComponent } from './personaggi/personaggi.component';
+import { OperaPersonaggiComponent } from './opera-personaggi/opera-personaggi.component';
 
 const routes: Routes = [
   {path: '', redirectTo : 'homepage', pathMatch : 'full'},
@@ -19,7 +20,9 @@ const routes: Routes = [
   {path:'intro-guide' , component: IntroGuideComponent},
   {path:'primservopera' , component: PrimservoperaComponent},
   {path:'secservopera' , component: SecservoperaComponent},
-  {path:'personaggio' , component: PersonaggiComponent}
+  {path:'personaggio' , component: PersonaggiComponent},
+  {path:'operapersonaggi' , component: OperaPersonaggiComponent},
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

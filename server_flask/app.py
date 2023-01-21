@@ -60,7 +60,7 @@ def get_musei():
 
 
 
-
+####################
 
 # Ritorna personaggi
 @app.route('/api/personaggi', methods=['GET', "POST"])
@@ -73,8 +73,22 @@ def get_personaggi():
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
 
+#####################
 
 
+
+
+
+# Visualizzazione personaggi in cui compaiono in un'opera specifica, inserita dall'utente
+@app.route('/api/opera_personaggi', methods=['GET', "POST"])
+def opera_personaggi():
+  opera = request.args.get('opera')
+  # opera = 'Cena in Emmaus'
+
+  q = f"select personaggio.nome, opera.titolo, opera.tecnica, opera.data_creazione,opera.immagine from Personaggio inner join Appartiene on Personaggio.id = Appartiene.idP inner join opera on Appartiene.idO = Opera.id where titolo = 'Cena in Emmaus'" 
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
 
 
 
