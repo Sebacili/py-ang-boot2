@@ -1,10 +1,23 @@
-<h1>Tutti gli artisti presenti nel db</h1>
+<h1>Visualizzazione artista nata in un anno specifico</h1>
+
+<br>
+
+<form>
+  <div class="form-outline mb-4">
+    <input #a [(ngModel)]="annoinserito" class="form-control form-control-lg" placeholder="inserisci un anno es. 1483" name = "annoinserito" required/>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button (click)="onClick(a)"> cerca </button>
+    <!-- <button (click)="onClick(t)" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"> Cerca </button> -->
+  </div>
+</form>
 
 
 <br>
 <br>
+<br>
+<br>
 
-  <!-- Source -->
 <div class="card flex-row" *ngFor="let data of dati">
     <img class="card-img-left example-card-img-responsive" style="min-width: 350px; min-height: 350px;" [src]="data.immagine"/>
     <div class="card-body">

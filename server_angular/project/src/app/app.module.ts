@@ -23,6 +23,8 @@ import { OperaTitoloComponent } from './opera-titolo/opera-titolo.component';
 import { OperatitoloService } from 'src/services/operatitolo.service';
 import { ArtistiComponent } from './artisti/artisti.component';
 import { ArtistiService } from 'src/services/artisti.service';
+import { AnnodataartistiComponent } from './annodataartisti/annodataartisti.component';
+import { AnnodataartistiService } from 'src/services/annodataartisti.service';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { ArtistiService } from 'src/services/artisti.service';
     OperaPersonaggiComponent,
     OperaTitoloComponent,
     ArtistiComponent,
+    AnnodataartistiComponent,
     
   ],
   imports: [
@@ -50,8 +53,8 @@ import { ArtistiService } from 'src/services/artisti.service';
 
   ],
   ////////////////
-  // for retreiving data from py
-  providers: [PrimservoperaService,SecservoperaService, OperapersonaggiService, OperatitoloService, ArtistiService],
+  // for retreiving data from py, all services
+  providers: [PrimservoperaService,SecservoperaService, OperapersonaggiService, OperatitoloService, ArtistiService, AnnodataartistiService],
   ///////////////
   bootstrap: [AppComponent]
 })

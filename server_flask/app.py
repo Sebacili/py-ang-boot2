@@ -116,6 +116,26 @@ def artisti():
 
 
 
+#####################
+
+# Visualizzazione tutti gli info di tutti gli artisti
+@app.route('/api/anno_data_artisti', methods=['GET', "POST"])
+def anno_data_artisti():
+  anno=request.args.get('annoinserito')
+  int_anno = int(anno)
+  # anno = 1483
+
+  q = f"SELECT * FROM artista WHERE DATEPART(year, data_nascita) = {anno}" 
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
+
+#####################
+
+
+
+
+
 
 #visualizzare museo
 #@app.route('/servizio3', methods=['GET'])
@@ -334,23 +354,7 @@ def get_artisti_in_vita():
   cursor.execute(q, p)
   data = cursor.fetchall()
 
-#@app.route('/servizio14', methods=['GET'])
-#def serv14():
-#
-#  query = f"select artista.nome, artista.cognome from artista where data_nascita = '{datains}'"
-#  df14 = pd.read_sql(query,conn)
-#  return render_template("1servizio.html", visua14 = df14)
 
-
-@app.route('/api/anno_data_artisti', methods=['GET'])
-def get_anno_data_artisti():
-  data = request.args.get('datanascitains')
-
-  q = f"select artista.nome, artista.cognome from artista where data_nascita = '{data}'" + (' WHERE titolo LIKE %(data)s' if data != None and data != '' else "")                                                                                       
-  cursor = conn.cursor(as_dict=True)
-  p = {"data": f"%{data}%"}
-  cursor.execute(q, p)
-  data = cursor.fetchall()
 
 #visualizzazione artisti e le loro opere e in quale musei sono esposti in base alla città natale che è stato inserito dall’utente
 #@app.route('/servizio15', methods=['GET'])
