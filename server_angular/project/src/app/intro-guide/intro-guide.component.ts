@@ -58,6 +58,12 @@ export class IntroGuideComponent implements OnInit{
     })
   }
 
+  reload() {
+    location.reload();
+    alert("Your thoughts has been saved!");
+
+  }
+
 //   name_user: string ='';
 //   email: string ='';
 //   message: string ='';
