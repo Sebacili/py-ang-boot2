@@ -6,6 +6,8 @@ import { datadynamichomeopera } from 'src/models/datadynamichomeopera.model';
 import { TempnumberoperaService } from 'src/services/tempnumberopera.service';
 import { TempnumberartistaService } from 'src/services/tempnumberartista.service';
 import { datadynamichomemuseo } from 'src/models/datadynamichomemuseo.model';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -14,21 +16,24 @@ import { datadynamichomemuseo } from 'src/models/datadynamichomemuseo.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  isShow = false;
 
+  localStorageIsEmpty: boolean = false;
   operedata : datadynamichomeopera[] | undefined;
   data: Object | undefined;
   loading: boolean | undefined;
   o: Observable<Object> | undefined;
   obsoperedata : Observable<datadynamichomeopera[]> | undefined;
 
+
   //, public TempnumberartistaService : TempnumberartistaService
-  constructor(public http: HttpClient, public TempnumberoperaService : TempnumberoperaService) { }
+  constructor(public http: HttpClient, public TempnumberoperaService : TempnumberoperaService, private router: Router) { }
 
   tempNumOpera :  number = 0;
   // tempNumArtista :  number = 0;
   // tempNumMuseo :  number = 0;
   ngOnInit(): void {
+  
+
     this.TempnumberoperaService.setTempNumOpera();
     this.tempNumOpera = this.TempnumberoperaService.getTempNumOpera();
     // this.TempnumberartistaService.setTempNumArtista();
@@ -38,9 +43,17 @@ export class HomeComponent implements OnInit {
     this.sendDataOpera(this.tempNumOpera);
     // this.sendDataArtista(this.tempNumArtista);
     // this.sendDataMuseo(this.tempNumMuseo);
+    this.isLocalStorageEmpty();
   }
 
-
+  
+  isLocalStorageEmpty(): boolean {
+    if(localStorage.length === 0){
+      return this.localStorageIsEmpty = true;
+    } else {
+      return this.localStorageIsEmpty = false;
+    }
+  }
 
   // send value for opera to python 
   datiOpera: datadynamichomeopera[] = [];
@@ -56,6 +69,10 @@ export class HomeComponent implements OnInit {
     }).subscribe(data => this.datiOpera = data);
   }
 
+  logout() {
+    localStorage.clear();
+    location.reload();
+  }
   // datiArtista: datadynamichomeartista[] = [];
   // sendDataArtista(tempNumArtista: number) 
   // { let body: HttpParams = new HttpParams().appendAll({tempNumArtista : tempNumArtista})
@@ -84,9 +101,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  toggleDisplay() {
-    this.isShow = !this.isShow;
-  }
+
 
 
 }

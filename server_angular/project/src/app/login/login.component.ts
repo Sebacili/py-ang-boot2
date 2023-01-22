@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     // Controllo se l'utente ha gia' eseguito il login
-    if (this.manager.getUser.id != -1) this.router.navigate(['/dashboard']);
+    if (this.manager.getUser.id != -1) this.router.navigate(['homepage']);
 
     // Inizializzo la form
     this.form = this.fb.group({
