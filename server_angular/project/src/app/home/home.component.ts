@@ -31,13 +31,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.TempnumberoperaService.setTempNumOpera();
     this.tempNumOpera = this.TempnumberoperaService.getTempNumOpera();
-    this.TempnumberartistaService.setTempNumArtista();
-    this.tempNumArtista = this.TempnumberartistaService.getTempNumArtista();
-    this.TempnumberartistaService.setTempNumMuseo();
-    this.tempNumMuseo = this.TempnumberartistaService.getTempNumMuseo();
+    // this.TempnumberartistaService.setTempNumArtista();
+    // this.tempNumArtista = this.TempnumberartistaService.getTempNumArtista();
+    // this.TempnumberartistaService.setTempNumMuseo();
+    // this.tempNumArtista = this.TempnumberartistaService.getTempNumMuseo();
     this.sendDataOpera(this.tempNumOpera);
-    this.sendDataArtista(this.tempNumArtista);
-    this.sendDataMuseo(this.tempNumMuseo);
+    // this.sendDataArtista(this.tempNumArtista);
+    // this.sendDataMuseo(this.tempNumMuseo);
   }
 
 
@@ -56,31 +56,31 @@ export class HomeComponent implements OnInit {
     }).subscribe(data => this.datiOpera = data);
   }
 
-  datiArtista: datadynamichomeartista[] = [];
-  sendDataArtista(tempNumArtista: number) 
-  { let body: HttpParams = new HttpParams().appendAll({tempNumArtista : tempNumArtista})
-    this.http.post<datadynamichomeartista[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/artista','',
-    {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      params: body,
-      responseType: "json"
-    }).subscribe(data => this.datiArtista = data);
-  }
+  // datiArtista: datadynamichomeartista[] = [];
+  // sendDataArtista(tempNumArtista: number) 
+  // { let body: HttpParams = new HttpParams().appendAll({tempNumArtista : tempNumArtista})
+  //   this.http.post<datadynamichomeartista[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/artista','',
+  //   {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     }),
+  //     params: body,
+  //     responseType: "json"
+  //   }).subscribe(data => this.datiArtista = data);
+  // }
 
-  datiMuseo: datadynamichomemuseo[] = [];
-  sendDataMuseo(tempNumArtista: number) 
-  { let body: HttpParams = new HttpParams().appendAll({tempNumArtista : tempNumArtista})
-    this.http.post<datadynamichomemuseo[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/museo','',
-    {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      params: body,
-      responseType: "json"
-    }).subscribe(data => this.datiMuseo = data);
-  }
+  // datiMuseo: datadynamichomemuseo[] = [];
+  // sendDataMuseo(tempNumArtista: number) 
+  // { let body: HttpParams = new HttpParams().appendAll({tempNumArtista : tempNumArtista})
+  //   this.http.post<datadynamichomemuseo[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/museo','',
+  //   {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     }),
+  //     params: body,
+  //     responseType: "json"
+  //   }).subscribe(data => this.datiMuseo = data);
+  // }
 
 
 
