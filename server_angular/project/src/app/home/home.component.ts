@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
   constructor(public http: HttpClient, public TempnumberoperaService : TempnumberoperaService, public TempnumberartistaService : TempnumberartistaService) { }
 
   tempNumOpera :  number = 0;
-  tempNumArtista :  number = 0;
-  tempNumMuseo :  number = 0;
+  // tempNumArtista :  number = 0;
+  // tempNumMuseo :  number = 0;
   ngOnInit(): void {
     this.TempnumberoperaService.setTempNumOpera();
     this.tempNumOpera = this.TempnumberoperaService.getTempNumOpera();
