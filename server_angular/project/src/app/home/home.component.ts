@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
   o: Observable<Object> | undefined;
   obsoperedata : Observable<datadynamichomeopera[]> | undefined;
 
-  
-  constructor(public http: HttpClient, public TempnumberoperaService : TempnumberoperaService, public TempnumberartistaService : TempnumberartistaService) { }
+  //, public TempnumberartistaService : TempnumberartistaService
+  constructor(public http: HttpClient, public TempnumberoperaService : TempnumberoperaService) { }
 
   tempNumOpera :  number = 0;
   // tempNumArtista :  number = 0;
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   datiOpera: datadynamichomeopera[] = [];
   sendDataOpera(tempNumOpera: number) 
   { let body: HttpParams = new HttpParams().appendAll({tempNumOpera : tempNumOpera})
-    this.http.post<datadynamichomeopera[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/opera','',
+    this.http.post<datadynamichomeopera[]>('https://3245-lukebasco121-pyangboot2-1gkb14v78nt.ws-eu83.gitpod.io/api/dynamicHome/opera','',
     {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

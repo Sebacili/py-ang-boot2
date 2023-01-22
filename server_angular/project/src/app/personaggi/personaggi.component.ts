@@ -26,7 +26,7 @@ export class PersonaggiComponent implements OnInit{
   }
 
   sendData(personaggi: string) { let body: HttpParams = new HttpParams().appendAll({personaggi : personaggi})
-    this.http.post<datapersonaggi[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/personaggi','',{
+    this.http.post<datapersonaggi[]>('https://3245-lukebasco121-pyangboot2-1gkb14v78nt.ws-eu83.gitpod.io/api/personaggi','',{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),

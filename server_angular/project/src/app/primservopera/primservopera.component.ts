@@ -28,7 +28,7 @@ export class PrimservoperaComponent implements OnInit{
   }
 
   sendData(tecnica: string) { let body: HttpParams = new HttpParams().appendAll({tecnica : tecnica})
-    this.http.post<dataprimservopera[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/tecnica_museo','',{
+    this.http.post<dataprimservopera[]>('https://3245-lukebasco121-pyangboot2-1gkb14v78nt.ws-eu83.gitpod.io/api/tecnica_museo','',{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),

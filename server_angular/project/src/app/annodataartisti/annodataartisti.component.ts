@@ -25,7 +25,7 @@ export class AnnodataartistiComponent implements OnInit{
   }
 
   sendData(annoinserito: string) { let body: HttpParams = new HttpParams().appendAll({annoinserito : annoinserito})
-    this.http.post<dataartisti[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/anno_data_artisti','',{
+    this.http.post<dataartisti[]>('https://3245-lukebasco121-pyangboot2-1gkb14v78nt.ws-eu83.gitpod.io/api/anno_data_artisti','',{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),

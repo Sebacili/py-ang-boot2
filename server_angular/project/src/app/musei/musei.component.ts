@@ -13,7 +13,7 @@ export class MuseiComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<Museo[]>('https://3245-lukebasco121-pyangboot2-bbser5npjxp.ws-eu81.gitpod.io/api/musei', {}).subscribe(data => {
+    this.http.get<Museo[]>('https://3245-lukebasco121-pyangboot2-1gkb14v78nt.ws-eu83.gitpod.io/api/musei', {}).subscribe(data => {
     this.musei = data;
     console.log(this.musei);
     })

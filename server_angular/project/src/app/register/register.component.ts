@@ -13,7 +13,7 @@ import { StorageServie } from 'src/services/storage.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  url: string = "https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/register/data";
+  url: string = "https://3245-lukebasco121-pyangboot2-1gkb14v78nt.ws-eu83.gitpod.io/register/data";
   form!: FormGroup;
   errorMessage!: string;
 

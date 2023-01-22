@@ -28,7 +28,7 @@ export class SecservoperaComponent implements OnInit{
   }
 
   sendData(nome_artista: string, cognome_artista: string) { let body: HttpParams = new HttpParams().appendAll({nome_artista : nome_artista, cognome_artista : cognome_artista})
-    this.http.post<datasecservopera[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/artista_musei','',{
+    this.http.post<datasecservopera[]>('https://3245-lukebasco121-pyangboot2-1gkb14v78nt.ws-eu83.gitpod.io/api/artista_musei','',{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
