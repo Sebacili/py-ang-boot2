@@ -9,6 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 conn = pymssql.connect(server="213.140.22.237\SQLEXPRESS", user="cilibeanu.nicolae",password="xxx123##",database="cilibeanu.nicolae")
+cursor = conn.cursor()
 
 
 @app.route('/', methods=['GET'])
@@ -146,6 +147,38 @@ def elencopersonaggi():
   df = pd.read_sql(q,conn)
   res = list(df.fillna("NaN").to_dict("index").values())
   return jsonify(res)
+
+#####################
+
+
+
+
+#####################
+
+# Visualizzazione tutti gli info di tutti gli artisti
+@app.route('/api/suggerimento', methods=['GET', "POST"])
+def suggerimento():
+
+  if request.method == 'POST':
+    name_user=request.args.get('name_user')
+    strname_user=str(name_user)
+    email=request.args.get('email')
+    stremail=str(email)
+    message=request.args.get('message')
+    strmessage=str(message)
+
+
+
+    # name_user='Invicta12'
+    # email='vxvzSDFvz@gmail.com'
+    # message='hello'
+
+    #query
+    cursor = conn.cursor(as_dict=True)
+    q = 'INSERT INTO suggerimento (opinione,nome_utente,email) VALUES (%(message)s, %(name_user)s, %(email)s)'
+    cursor.execute(q, params={'message': strmessage, 'name_user': strname_user, 'email': stremail})
+    conn.commit()
+    return jsonify(request.args)
 
 #####################
 
