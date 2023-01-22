@@ -16,8 +16,14 @@ export class ManagerService {
    * @param u {string} Utente
    */
   public setUser(user: User): void {
+    console.log(user);
+
     this.user = user;
     this.userEmitter.emit(user);
+
+    localStorage.setItem('id', user.id.toString());
+    localStorage.setItem('username', user.nome_utente);
+    localStorage.setItem('email', user.email);
   }
 
   /**

@@ -24,34 +24,22 @@
             <form [formGroup]="form" (ngSubmit)="submit()">
 
               <div class="form-outline mb-4">
-                <input type="text"  class="form-control form-control-lg" />
-                <label class="form-label" for="nome_user">Your Name</label>
+                <input type="text"  class="form-control form-control-lg" id="username" name="username" formControlName="nome_utente" />
+                <label class="form-label" for="nome_utente">Your Name</label>
               </div>
 
               <div class="form-outline mb-4">
-                <input type="email"  class="form-control form-control-lg" />
+                <input type="email"  class="form-control form-control-lg" id="email" name="email" formControlName="email" />
                 <label class="form-label" for="email_user">Your Email</label>
               </div>
 
               <div class="form-outline mb-4">
-                <input type="password"  class="form-control form-control-lg" />
+                <input type="password"  class="form-control form-control-lg" id="password" name="password" formControlName="passw" />
                 <label class="form-label" for="passw_user">Password</label>
               </div>
 
-              <div class="form-outline mb-4">
-                <input type="password"  class="form-control form-control-lg" />
-                <label class="form-label" for="repeatedpassw_user">Repeat your password</label>
-              </div>
-
-              <!--<div class="form-check d-flex justify-content-center mb-5"> -->
-              <!--    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" /> -->
-              <!--    <label class="form-check-label" for="form2Example3g"> -->
-              <!--    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a> -->
-              <!--    </label> -->
-              <!--</div> -->
-
               <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" id="registratibtn" [disabled]="!form.valid">Register</button>
               </div>
 
             </form>
@@ -71,7 +59,12 @@
 
 
 
-
+              <!--<div class="form-check d-flex justify-content-center mb-5"> -->
+              <!--    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" /> -->
+              <!--    <label class="form-check-label" for="form2Example3g"> -->
+              <!--    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a> -->
+              <!--    </label> -->
+              <!--</div> -->
 
 
 

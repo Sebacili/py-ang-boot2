@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Data, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { Data } from 'src/models/loginData.model';
+
 import { ManagerService } from 'src/services/manager.service';
 
 @Component({
@@ -37,13 +39,13 @@ export class LoginComponent implements OnInit{
   submit() {
     // Creo l'oggetto che verra' inviaro al server Flask con le credenziali delll'utente
     let body: HttpParams = new HttpParams().appendAll({
-      'email': this.form.value.email,
-      'password': this.form.value.password,
-      'nome_ut': this.form.value.name
+      email: this.form.value.email,
+      password: this.form.value.password,
+      nome_ut: this.form.value.nome_ut
     });
 
     // Eseguo la richiesta in POST
-    this.http.post<Data>('http://127.0.0.1:3245/api/login', '', {
+    this.http.post<Data>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/login', '', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
@@ -53,13 +55,13 @@ export class LoginComponent implements OnInit{
       // Aspetto la risposta del server e comunico all'utente la risposta
       if (data['statusCode'] == 200) {
         // Invio le informazioni dell'utente alle pagine in ascolto
-        this.manager.setUser(data['data']);
+        this.manager.setUser(data.data);
 
-        // Reindirizzo l'utente alla sua dashboard
-        this.router.navigate(['/dashboard']);
+        // Reindirizzo l'utente al homepage
+        this.router.navigate(['homepage']);
       } else {
-        this.statusCode = data['statusCode'];
-        this.errorMessage = data['errorMessage'];
+        this.statusCode = data.statusCode;
+        this.errorMessage = data.errorMessage;
       }
     });
   }

@@ -16,22 +16,22 @@ import { AnnodataartistiComponent } from './annodataartisti/annodataartisti.comp
 import { ElencopersonaggiComponent } from './elencopersonaggi/elencopersonaggi.component';
 
 const routes: Routes = [
-  {path: '', redirectTo : 'homepage', pathMatch : 'full'},
-  {path:'register' , component: RegisterComponent},
-  {path:'login' , component: LoginComponent},
-  {path:'homepage' , component: HomeComponent},
-  {path:'musei' , component: MuseiComponent},
-  {path:'intro-guide' , component: IntroGuideComponent},
-  {path:'primservopera' , component: PrimservoperaComponent},
-  {path:'secservopera' , component: SecservoperaComponent},
-  {path:'personaggio' , component: PersonaggiComponent},
-  {path:'operapersonaggi' , component: OperaPersonaggiComponent},
-  {path:'operatitolo' , component: OperaTitoloComponent},
-  {path:'artisti' , component: ArtistiComponent},
-  {path:'annodataartisti' , component: AnnodataartistiComponent},
-  {path:'elencopersonaggi' , component: ElencopersonaggiComponent},
-
+  { path: '', redirectTo: 'homepage', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'homepage', component: HomeComponent },
+  { path: 'musei', component: MuseiComponent },
+  { path: 'intro-guide', component: IntroGuideComponent },
+  { path: 'primservopera', component: PrimservoperaComponent },
+  { path: 'secservopera', component: SecservoperaComponent },
+  { path: 'personaggio', component: PersonaggiComponent },
+  { path: 'operapersonaggi', component: OperaPersonaggiComponent },
+  { path: 'operatitolo', component: OperaTitoloComponent },
+  { path: 'artisti', component: ArtistiComponent },
+  { path: 'annodataartisti', component: AnnodataartistiComponent },
+  { path: 'elencopersonaggi', component: ElencopersonaggiComponent },
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

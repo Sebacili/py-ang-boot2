@@ -542,6 +542,41 @@ def serv22():
 
 
 
+
+
+
+
+## Register 
+
+@app.route("/register/data", methods=["POST"])
+def dati_registrazione():
+  nome_utente = request.args.get("nome_utente")
+  email = request.args.get("email")
+  passw = request.args.get("passw")
+
+  Cq = "SELECT * FROM utente WHERE nome_utente = %(nome_utente)s OR email = %(e)s"
+  Ccursor = conn.cursor(as_dict=True)
+  Cp = {"nome_utente": nome_utente, "e": email}
+  Ccursor.execute(Cq, Cp)
+  Cdata = Ccursor.fetchall()
+
+  # print(Cdata)
+
+  if len(Cdata) < 1:
+    print(request.args)
+    q = 'INSERT INTO utente (nome_utente, email, passw) VALUES (%(nome_utente)s, %(email)s, %(passw)s)'
+    cursor = conn.cursor(as_dict=True)
+    p = {"nome_utente": f"{nome_utente}","email": f"{email}","passw": f"{passw}"}
+
+    cursor.execute(q, p)
+    conn.commit()
+    return jsonify({'data': 'Ok!', 'url': 'login'})
+  else:
+    return jsonify({'data': 'User already exists!', 'url': None})
+
+
+
+
 # @app.route('/info/post/registration', methods=['POST'])
 # def registration():
 #   datiutenti = request.get_json()
@@ -796,7 +831,7 @@ def login():
   # Controllo se nono stati passati tutti i parametri richiesti
   if None not in [email, password, nome_ut]:
     # Prendo le informazioni dell'utente
-    q = 'SELECT * FROM utente WHERE email = %(e)s and nome_ut = %(n)s'
+    q = 'SELECT * FROM utente WHERE email = %(e)s and nome_utente = %(n)s'
     cursor = conn.cursor(as_dict=True)
     cursor.execute(q, params={"e": email, "n": nome_ut})
     res = cursor.fetchall()
@@ -805,11 +840,11 @@ def login():
     if len(res) < 1:
       data["statusCode"] = 404
       data["errorMessage"] = "No user was found with that email"
-    elif not (res[0]["password"] == password):
+    elif not (res[0]["passw"] == password):
       data["statusCode"] = 403
       data["errorMessage"] = "Wrong password"
     else:
-      data["data"] = res
+      data["data"] = res[0]
   else:
     data['statusCode'] = 400
     data['errorMessage'] = "No email or password provided"

@@ -1,97 +1,71 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ManagerService } from 'src/services/manager.service';
-import { Data, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
+import { Data } from 'src/models/redirectData.model';
+import { StorageregisterService } from 'src/services/storageregister.service';
+import { StorageServie } from 'src/services/storage.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  // form_info_u = {
-  //   name: '',
-  //   email: '',
-  //   passw: '',
-  //   repeatedpassw: ''
-  // }
+  url: string = "https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/register/data";
   form!: FormGroup;
   errorMessage!: string;
-  statusCode!: number;
 
   constructor(
-    private fb: FormBuilder,
     private http: HttpClient,
+    private fb: FormBuilder,
     private router: Router,
-    private manager: ManagerService
+    private storage: StorageregisterService
   ) { }
 
-
   ngOnInit(): void {
-    // Controllo se l'utente ha gia' eseguito il login
-    if (this.manager.getUser.id != -1) this.router.navigate(['/dashboard']);
+    if (this.storage.getData('id') != null) this.router.navigate(['homepage']);
 
-    // Inizializzo la form
     this.form = this.fb.group({
+      nome_utente: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
-      nome_ut: ["", [Validators.required]],
-      password: ["", [Validators.required]],
-      reppassw: ["", [Validators.required]]
-    })
+      passw: ["", [Validators.required]]
+    });
   }
 
   submit() {
-    // Creo l'oggetto che verra' inviaro al server Flask con le credenziali delll'utente
-    let body: HttpParams = new HttpParams().appendAll({
-      'email': this.form.value.email,
-      'nome_ut': this.form.value.name,
-      'password': this.form.value.password,
-      'reppassw': this.form.value.password
+    let body: HttpParams = new HttpParams();
+    body = body.appendAll({
+      nome_utente: this.form.value.nome_utente,
+      email: this.form.value.email,
+      passw: this.form.value.passw
     });
 
-    // Eseguo la richiesta in POST
-    this.http.post<Data>('http://127.0.0.1:3245/api/register', '', {
+    this.http.post<Data>(this.url, '', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
       params: body,
       responseType: "json"
     }).subscribe(data => {
-      // Aspetto la risposta del server e comunico all'utente la risposta
-      if (data['statusCode'] == 200) {
-        // Invio le informazioni dell'utente alle pagine in ascolto
-        this.manager.setUser(data['data']);
+      console.log(data.data);
 
-        // Reindirizzo l'utente alla sua dashboard
-        this.router.navigate(['/dashboard']);
+      if (data.url != null) {
+        this.router.navigate([data.url]);
       } else {
-        this.statusCode = data['statusCode'];
-        this.errorMessage = data['errorMessage'];
+        this.errorMessage = data.data;
       }
-    });
+    })
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
   // senddata(){
   //   this.http.post('https://3245-lukebasco121-pyangboot2-qrwb9ohee2q.ws-eu83.gitpod.io/info/post/registration', this.form).subscribe()
   // }
 
-}
+
 
 
 
