@@ -69,19 +69,19 @@
     <div class="container">
       <h2 >Opera</h2>
       <br>
-      <h4>titolo.opera</h4>
-      <div class="container__contenuto">
-        <hr>
-        <div class="col-sm-12 col-xl-6">
-          <p>È un’opera molto celebre per via del soggetto allegorico e dal significato ancora non del tutto svelato.
-            
-            I personaggi allegorici del dipinto sono allineati sul primo piano di un paesaggio scuro e controluce. Infatti a destra Zefiro raggiunge e abbraccia la Ninfa Clori che appare nuovamente a sinistra nelle forme di Flora vestita di fiori. Al centro poi sono raffigurati Venere e Cupido che scaglia il dardo d’amore. Le tre Grazie inoltre danzano sulla sinistra vestite con veli trasparenti. Mercurio infine alza il braccio destro e con il caduceo tocca una nuvola. Infine il prato è cosparso di fiori ed erbe mentre tra le fronde degli alberi sono dipinti frutti color arancio.
-          </p>
+      <div *ngFor="let item of datiOpera">
+        <h4>{{item.titolo}}</h4>
+        <div class="container__contenuto">
+          <hr>
+          <div class="col-sm-12 col-xl-6">
+            <p>
+              {{item.descrizione}}
+            </p>
+          </div>
+          <div class="col-sm-12 col-xl-6 cont_img">
+            <img class="immagine"  [src]="item.immagine" alt="Immagine dell'Opera">
+          </div>
         </div>
-        <div class="col-sm-12 col-xl-6 cont_img">
-          <img class="immagine" src="assets/images/La_Primavera.jpeg" alt="Immagine dell'Opera">
-        </div>
-
       </div>
 
 

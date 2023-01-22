@@ -855,11 +855,13 @@ def login():
 
 
 # for a dynamic home
-@app.route('/api/dynamicHome/opera', methods=['get'])
+@app.route('/api/dynamicHome/opera', methods=['GET', "POST"])
 def dynamicHome():
-  data = 5
-  # data = request.args.get("randnum1")
-  q = f'select opera.id, opera.titolo, opera.descrizione, opera.immagine from opera where id = {data}' 
+  tempNumOpera = request.args.get("tempNumOpera")
+  inttempNumOpera = int(tempNumOpera)
+  # inttempNumOpera = 5
+
+  q = f'select opera.id, opera.titolo, opera.descrizione, opera.immagine from opera where id = {inttempNumOpera}' 
   df = pd.read_sql(q, conn)
   res = list(df.fillna("NaN").to_dict("index").values())    # list(df.to_dict("index").values())
   return jsonify(res)
