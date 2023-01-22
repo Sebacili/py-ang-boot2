@@ -84,7 +84,7 @@ body {font-family: "Lato", sans-serif}
             </div>
           </div>
           <input class="w3-input w3-border" type="text" placeholder="Message" required name="message" formControlName="message" id="message" name="message">
-          <button type="submit" class="w3-button w3-black w3-section w3-right" [disabled]="addsuggFrom.valid" (click)="reload()">SEND</button>
+          <button type="submit" class="w3-button w3-black w3-section w3-right" [disabled]="!addsuggFrom.valid" (click)="reload()">SEND</button>
         </form>
 
       </div>
