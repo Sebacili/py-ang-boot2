@@ -15,12 +15,12 @@ export class IntroGuideComponent implements OnInit{
   ngOnInit(): void {
     this.isLocalStorageEmpty();
     this.addsuggFrom = this.fb.group({
-      nome: ["", [Validators.required]],
-      difficolta: ["", [Validators.required]],
-      n_gioc: ["", [Validators.required]],
-      scopo: ["", [Validators.required]],
+      name_user: ["", [Validators.required]],
+      email: ["", [Validators.required]],
+      message: ["", [Validators.required]],
     });
   }
+
 
   isLocalStorageEmpty(): boolean {
     if(localStorage.length === 0){
@@ -62,6 +62,17 @@ export class IntroGuideComponent implements OnInit{
     location.reload();
     alert("Your thoughts has been saved!");
 
+  }
+
+
+  email_ins: string='';
+  checkFormValue(key: string) {
+    const value = localStorage.getItem(email);
+    if (this.email_ins === value) {
+      console.log('The form value is equal to the value in local storage.');
+    } else {
+      console.log('The form value is not equal to the value in local storage.');
+    }
   }
 
 //   name_user: string ='';
