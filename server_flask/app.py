@@ -856,12 +856,31 @@ def login():
 
 # for a dynamic home
 @app.route('/api/dynamicHome/opera', methods=['GET', "POST"])
-def dynamicHome():
+def dynamicHomeopera():
   tempNumOpera = request.args.get("tempNumOpera")
   inttempNumOpera = int(tempNumOpera)
   # inttempNumOpera = 5
-
   q = f'select opera.id, opera.titolo, opera.descrizione, opera.immagine from opera where id = {inttempNumOpera}' 
+  df = pd.read_sql(q, conn)
+  res = list(df.fillna("NaN").to_dict("index").values())    # list(df.to_dict("index").values())
+  return jsonify(res)
+
+@app.route('/api/dynamicHome/artista', methods=['GET', "POST"])
+def dynamicHomeartista():
+  tempNumArtista = request.args.get("tempNumArtista")
+  inttempNumArtista = int(tempNumArtista)
+  # tempNumArtista = 5
+  q = f'select Artista.id, Artista.Nome, Artista.cognome, Artista.biografia, Artista.immagine from Artista where Artista.idfordinamichome = {tempNumArtista}' 
+  df = pd.read_sql(q, conn)
+  res = list(df.fillna("NaN").to_dict("index").values())    # list(df.to_dict("index").values())
+  return jsonify(res)
+
+@app.route('/api/dynamicHome/museo', methods=['GET', "POST"])
+def dynamicHomemuseo():
+  tempNumMuseo = request.args.get("tempNumMuseo")
+  inttempNumMuseo = int(tempNumMuseo)
+  # inttempNumMuseo = 5
+  q = f'select museo.id, museo.nome, museo.descrizione, museo.immagine from museo where idfordinamichome = {inttempNumMuseo}' 
   df = pd.read_sql(q, conn)
   res = list(df.fillna("NaN").to_dict("index").values())    # list(df.to_dict("index").values())
   return jsonify(res)

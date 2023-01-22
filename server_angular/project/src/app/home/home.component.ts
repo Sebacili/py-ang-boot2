@@ -1,8 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { datadynamichomeartista } from 'src/models/datadynamichomeartista.model';
 import { datadynamichomeopera } from 'src/models/datadynamichomeopera.model';
 import { TempnumberoperaService } from 'src/services/tempnumberopera.service';
+import { TempnumberartistaService } from 'src/services/tempnumberartista.service';
+import { datadynamichomemuseo } from 'src/models/datadynamichomemuseo.model';
 
 
 @Component({
@@ -20,37 +23,65 @@ export class HomeComponent implements OnInit {
   obsoperedata : Observable<datadynamichomeopera[]> | undefined;
 
   
-  constructor(public http: HttpClient, public randomServiceOpera : TempnumberoperaService) { }
+  constructor(public http: HttpClient, public TempnumberoperaService : TempnumberoperaService, public TempnumberartistaService : TempnumberartistaService) { }
 
   tempNumOpera :  number = 0;
+  tempNumArtista :  number = 0;
+  tempNumMuseo :  number = 0;
   ngOnInit(): void {
-    this.randomServiceOpera.setTempNumOpera();
-    this.tempNumOpera = this.randomServiceOpera.getTempNumOpera();
-    this.sendData(this.tempNumOpera);
+    this.TempnumberoperaService.setTempNumOpera();
+    this.tempNumOpera = this.TempnumberoperaService.getTempNumOpera();
+    this.TempnumberartistaService.setTempNumArtista();
+    this.tempNumArtista = this.TempnumberartistaService.getTempNumArtista();
+    this.TempnumberartistaService.setTempNumMuseo();
+    this.tempNumMuseo = this.TempnumberartistaService.getTempNumMuseo();
+    this.sendDataOpera(this.tempNumOpera);
+    this.sendDataArtista(this.tempNumArtista);
+    this.sendDataMuseo(this.tempNumMuseo);
   }
+
+
 
   // send value for opera to python 
   datiOpera: datadynamichomeopera[] = [];
-  sendData(tempNumOpera: number) { let body: HttpParams = new HttpParams().appendAll({tempNumOpera : tempNumOpera})
-  this.http.post<datadynamichomeopera[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/opera','',{
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    }),
-    params: body,
-    responseType: "json"
-  }).subscribe(data => this.datiOpera = data);
-}
-
-  //Nota bene, questo è un metodo alternativo al metodo makeRequest
-  makeCompactRequest(): void {
-    this.loading = true;
-    this.http
-      .get('https://3245-lukebasco121-pyangboot2-0fwxiji06fr.ws-eu83.gitpod.io/api/dynamicHome')
-      .subscribe(data => {
-        this.data = data;
-        this.loading = false;
-      });
+  sendDataOpera(tempNumOpera: number) 
+  { let body: HttpParams = new HttpParams().appendAll({tempNumOpera : tempNumOpera})
+    this.http.post<datadynamichomeopera[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/opera','',
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: body,
+      responseType: "json"
+    }).subscribe(data => this.datiOpera = data);
   }
+
+  datiArtista: datadynamichomeartista[] = [];
+  sendDataArtista(tempNumArtista: number) 
+  { let body: HttpParams = new HttpParams().appendAll({tempNumArtista : tempNumArtista})
+    this.http.post<datadynamichomeartista[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/artista','',
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: body,
+      responseType: "json"
+    }).subscribe(data => this.datiArtista = data);
+  }
+
+  datiMuseo: datadynamichomemuseo[] = [];
+  sendDataMuseo(tempNumArtista: number) 
+  { let body: HttpParams = new HttpParams().appendAll({tempNumArtista : tempNumArtista})
+    this.http.post<datadynamichomemuseo[]>('https://3245-lukebasco121-pyangboot2-iflf8mih949.ws-eu83.gitpod.io/api/dynamicHome/museo','',
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      params: body,
+      responseType: "json"
+    }).subscribe(data => this.datiMuseo = data);
+  }
+
 
 
   toggleDisplay() {

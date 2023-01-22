@@ -17,6 +17,5 @@ export class TempnumberoperaService {
     return this.tempNumOpera;
   }
 
-
 }
 

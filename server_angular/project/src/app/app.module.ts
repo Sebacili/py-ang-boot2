@@ -29,6 +29,7 @@ import { ElencopersonaggiComponent } from './elencopersonaggi/elencopersonaggi.c
 import { ElencopersonaggiService } from 'src/services/elencopersonaggi.service';
 import { StorageregisterService } from 'src/services/storageregister.service';
 import { TempnumberoperaService } from 'src/services/tempnumberopera.service';
+import { TempnumberartistaService } from 'src/services/tempnumberartista.service';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { TempnumberoperaService } from 'src/services/tempnumberopera.service';
     ElencopersonaggiService,
     StorageregisterService,
     TempnumberoperaService,
+    TempnumberartistaService,
   ],
   ///////////////
   bootstrap: [AppComponent]
