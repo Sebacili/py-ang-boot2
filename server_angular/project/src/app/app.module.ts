@@ -28,6 +28,7 @@ import { AnnodataartistiService } from 'src/services/annodataartisti.service';
 import { ElencopersonaggiComponent } from './elencopersonaggi/elencopersonaggi.component';
 import { ElencopersonaggiService } from 'src/services/elencopersonaggi.service';
 import { StorageregisterService } from 'src/services/storageregister.service';
+import { TempnumberoperaService } from 'src/services/tempnumberopera.service';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -58,7 +59,17 @@ import { StorageregisterService } from 'src/services/storageregister.service';
   ],
   ////////////////
   // for retreiving data from py, all services
-  providers: [PrimservoperaService,SecservoperaService, OperapersonaggiService, OperatitoloService, ArtistiService, AnnodataartistiService, ElencopersonaggiService, StorageregisterService],
+  providers: [
+    PrimservoperaService,
+    SecservoperaService,
+    OperapersonaggiService,
+    OperatitoloService,
+    ArtistiService,
+    AnnodataartistiService,
+    ElencopersonaggiService,
+    StorageregisterService,
+    TempnumberoperaService,
+  ],
   ///////////////
   bootstrap: [AppComponent]
 })

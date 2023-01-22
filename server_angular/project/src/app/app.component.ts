@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TempNumberService } from './temp-number.service';
+import { TempNumberService } from '../services/temp-number.service';
 // import { tempNum } from './temp-number.service';
 
 @Component({
@@ -25,9 +25,4 @@ export class AppComponent implements OnInit{
     // this.tempNum3 = this.randomService.setTempNum3();
   }
   
-
-
-
-
-
 }

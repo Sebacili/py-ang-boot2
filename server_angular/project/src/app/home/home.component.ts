@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { dynamichomeopera } from 'src/models/dynamichomeopera.model';
+import { datadynamichomeopera } from 'src/models/datadynamichomeopera.model';
+import { TempnumberoperaService } from 'src/services/tempnumberopera.service';
 
 
 @Component({
@@ -12,15 +13,20 @@ import { dynamichomeopera } from 'src/models/dynamichomeopera.model';
 export class HomeComponent implements OnInit {
   isShow = false;
 
-  operedata : dynamichomeopera[] | undefined;
+  operedata : datadynamichomeopera[] | undefined;
   data: Object | undefined;
   loading: boolean | undefined;
   o: Observable<Object> | undefined;
-  obsoperedata : Observable<dynamichomeopera[]> | undefined;
+  obsoperedata : Observable<datadynamichomeopera[]> | undefined;
 
   
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public randomServiceOpera : TempnumberoperaService) { }
 
+  tempNumOpera :  number = 0;
+  ngOnInit(): void {
+    this.randomServiceOpera.setTempNumOpera();
+    this.tempNumOpera = this.randomServiceOpera.getTempNumOpera();
+  }
 
   //Nota bene, questo è un metodo alternativo al metodo makeRequest
   makeCompactRequest(): void {
@@ -38,7 +44,5 @@ export class HomeComponent implements OnInit {
     this.isShow = !this.isShow;
   }
 
-  ngOnInit(): void {
-  }
 
 }
