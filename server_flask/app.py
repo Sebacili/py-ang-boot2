@@ -203,6 +203,23 @@ def elencoopere():
 
 
 
+#####################
+
+# Visualizzazione tutti gli info di tutti gli artisti
+@app.route('/api/elencomusei', methods=['GET', "POST"])
+def elencomusei():
+
+  q = "select * from Museo" 
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
+
+#####################
+
+
+
+
+
 
 
 #visualizzare museo

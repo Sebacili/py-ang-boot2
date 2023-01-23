@@ -15,6 +15,7 @@ import { ArtistiComponent } from './artisti/artisti.component';
 import { AnnodataartistiComponent } from './annodataartisti/annodataartisti.component';
 import { ElencopersonaggiComponent } from './elencopersonaggi/elencopersonaggi.component';
 import { ElencoopereComponent } from './elencoopere/elencoopere.component';
+import { ElencomuseiComponent } from './elencomusei/elencomusei.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'annodataartisti', component: AnnodataartistiComponent },
   { path: 'elencopersonaggi', component: ElencopersonaggiComponent },
   { path: 'elencoopere', component: ElencoopereComponent },
+  { path: 'elencomusei', component: ElencomuseiComponent },
 ];
 
 @NgModule({

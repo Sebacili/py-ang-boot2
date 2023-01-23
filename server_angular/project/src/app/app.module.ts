@@ -32,6 +32,8 @@ import { TempnumberoperaService } from 'src/services/tempnumberopera.service';
 import { TempnumberartistaService } from 'src/services/tempnumberartista.service';
 import { ElencoopereComponent } from './elencoopere/elencoopere.component';
 import { ElencoopereService } from 'src/services/elencoopere.service';
+import { ElencomuseiComponent } from './elencomusei/elencomusei.component';
+import { ElencomuseiService } from 'src/services/elencomusei.service';
 // ng add ngx-bootstrap - https://www.npmjs.com/package/ngx-bootstrap
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { ElencoopereService } from 'src/services/elencoopere.service';
     AnnodataartistiComponent,
     ElencopersonaggiComponent,
     ElencoopereComponent,
+    ElencomuseiComponent,
     
   ],
   imports: [
@@ -75,6 +78,7 @@ import { ElencoopereService } from 'src/services/elencoopere.service';
     TempnumberoperaService,
     TempnumberartistaService,
     ElencoopereService,
+    ElencomuseiService,
   ],
   ///////////////
   bootstrap: [AppComponent]

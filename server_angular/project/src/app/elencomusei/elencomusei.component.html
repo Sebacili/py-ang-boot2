@@ -1,0 +1,15 @@
+<h1>Tutti gli artisti presenti nel db</h1>
+
+
+<br>
+<br>
+
+  <!-- Source -->
+<div class="card flex-row" *ngFor="let data of dati">
+    <img class="card-img-left example-card-img-responsive" style="max-width: 800px; max-height: 600px; min-width: 400px; min-height: 200px;" [src]="data.immagine"/>
+    <div class="card-body">
+      <h4 class="card-title h5 h4-sm"> Nome: {{ data.nome }}</h4>
+      <p class="card-text"> citta e paese: {{ data.citta }}, {{ data.paese }}</p>
+      <p class="card-text"> {{ data.descrizione }}</p>
+    </div>
+</div>
