@@ -184,6 +184,27 @@ def suggerimento():
 
 
 
+
+
+#####################
+
+# Visualizzazione tutti gli info di tutti gli artisti
+@app.route('/api/elencoopere', methods=['GET', "POST"])
+def elencoopere():
+
+  q = "select * from Opera" 
+  df = pd.read_sql(q,conn)
+  res = list(df.fillna("NaN").to_dict("index").values())
+  return jsonify(res)
+
+#####################
+
+
+
+
+
+
+
 #visualizzare museo
 #@app.route('/servizio3', methods=['GET'])
 #def serv3():

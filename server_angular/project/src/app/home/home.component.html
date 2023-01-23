@@ -29,6 +29,7 @@
               <li class="nav-item dropdown" id="myDropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  opera  </a>
                 <ul class="dropdown-menu">
+                  <li> <a class="dropdown-item" [routerLink]="['/elencoopere']"> Elenco opera </a></li>
                   <li> <a class="dropdown-item" [routerLink]="['/operapersonaggi']"> Visualizzazione personaggi in cui compaiono in un'opera specifica</a></li>
                   <li><a class="dropdown-item" [routerLink]="['/operatitolo']"> Visualizzazione opera specifica </a></li>
                 </ul>
@@ -37,7 +38,7 @@
               <li class="nav-item dropdown" id="myDropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  artista  </a>
                 <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" [routerLink]="['/artisti']"> tutti gli artisti </a></li>
+                  <li> <a class="dropdown-item" [routerLink]="['/artisti']"> Elenco artisti </a></li>
                   <li><a class="dropdown-item" [routerLink]="['/annodataartisti']"> Visualizzazione artista nato in un anno specifico </a></li>
                 </ul>
               </li>
@@ -45,8 +46,8 @@
               <li class="nav-item dropdown" id="myDropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Personaggi  </a>
                 <ul class="dropdown-menu">
-                  <li> <a class="dropdown-item" [routerLink]="['/personaggio']"> Visualizzazione opere in cui compare un personaggio specifico</a></li>
                   <li><a class="dropdown-item" [routerLink]="['/elencopersonaggi']"> Elenco Personaggi </a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/personaggio']"> Visualizzazione opere in cui compare un personaggio specifico</a></li>
                 </ul>
               </li>
             </ul>
