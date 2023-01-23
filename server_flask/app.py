@@ -665,9 +665,14 @@ def modificadesiderata():
 def AggCol():
   nome_colAggCol = request.args['nome_col']
   data_typeAggCol = request.args['data_type']
-  query = f"ALTER TABLE {entitascelta} ADD {nome_colAggCol} {data_typeAggCol};"
-  df2 = pd.read_sql(query,conn)
-  return render_template("AggCol.html", nom_col = nome_colAggCol, DT = data_typeAggCol, tab = entitascelta)
+  if data_typeAggCol == 'varchar':
+    query = f"ALTER TABLE {entitascelta} ADD {nome_colAggCol} {data_typeAggCol}(3000);"
+    df2 = pd.read_sql(query,conn)
+    return render_template("AggCol.html", nom_col = nome_colAggCol, DT = data_typeAggCol, tab = entitascelta)
+  else:
+    query = f"ALTER TABLE {entitascelta} ADD {nome_colAggCol} {data_typeAggCol};"
+    df2 = pd.read_sql(query,conn)
+    return render_template("AggCol.html", nom_col = nome_colAggCol, DT = data_typeAggCol, tab = entitascelta)
 
 
 @app.route('/backend/collaborators/modificadesiderata/ElCol', methods=['Post'])
@@ -694,6 +699,9 @@ def altDTCol():
   return render_template("altDTCol.html", nom_col = nome_colElCol, dt = new_dt, tab = entitascelta)
 
 
+from datetime import datetime
+from dateutil import parser
+
 @app.route('/backend/collaborators/modificadesiderata/InsInfo', methods=['Post'])
 def InsInfo():
   if entitascelta == "Museo":
@@ -702,23 +710,34 @@ def InsInfo():
     paese = request.args['nome_col_paese']
     descrizione = request.args['nome_col_descrizione']
     immagine = request.args['nome_col_immagine']
-    query = f"INSERT INTO table_name (nome, citta, paese, descrizione, immagine) VALUES ({nome}, {citta}, {paese}, {descrizione}, {immagine});"
+    query = f"INSERT INTO {entitascelta} (nome, citta, paese, descrizione, immagine) VALUES ('{nome}', '{citta}', '{paese}', '{descrizione}', '{immagine}');"
     df2 = pd.read_sql(query,conn)
     return render_template("InsInfoM.html", nome = nome, citta = citta, paese = paese, descrizione = descrizione, immagine = immagine, tab = entitascelta)
   elif entitascelta == "Artista":
     nome = request.args['nome_col_nome']
     cognome = request.args['nome_col_cognome']
-    data_nascita = request.args['nome_col_data_nascita']
-    data_decesso = request.args['nome_col_data_decesso']
+    data_nascita_input = request.args['nome_col_data_nascita']
+    data_decesso_input = request.args['nome_col_data_decesso']
+# per verificare se il date inputtato è corretto
+    try:
+      data_nascita = parser.parse(data_nascita_input)
+      formatted_data_nascita_str = data_nascita.strftime('%Y-%m-%d')
+    except ValueError:
+      print("Invalid date format. Please enter the date in YYYY-MM-DD format.")
+    try:
+      data_decesso = parser.parse(data_decesso_input)
+      formatted_data_decesso_str = data_decesso.strftime('%Y-%m-%d')
+    except ValueError:
+      print("Invalid date format. Please enter the date in YYYY-MM-DD format.")
     citta_natale = request.args['nome_col_citta_natale']
     paese_natale = request.args['nome_col_paese_natale']
     citta_decesso = request.args['nome_col_citta_decesso']
     paese_decesso = request.args['nome_col_paese_decesso']
     biografia  = request.args['nome_col_biografia']
     immagine = request.args['nome_col_immagine']
-    query = f"INSERT INTO table_name (nome, cognome, data_nascita, data_decesso, citta_natale, paese_natale, citta_decesso, paese_decesso, biografia, immagine) VALUES ({nome}, {cognome}, {data_nascita}, {data_decesso}, {citta_natale}, {paese_natale}, {citta_decesso}, {paese_decesso}, {biografia}, {immagine});"
+    query = f"INSERT INTO {entitascelta} (nome, cognome, data_nascita, data_decesso, citta_natale, paese_natale, citta_decesso, paese_decesso, biografia, immagine) VALUES ('{nome}', '{cognome}', '{formatted_data_nascita_str}', '{formatted_data_decesso_str}', '{citta_natale}', '{paese_natale}', '{citta_decesso}', '{paese_decesso}', '{biografia}', '{immagine}');"
     df2 = pd.read_sql(query,conn)
-    return render_template("InsInfoA.html", nome = nome, cognome = cognome, data_nascita = data_nascita, data_decesso = data_decesso, citta_natale = citta_natale, paese_natale = paese_natale, citta_decesso = citta_decesso, paese_decesso = paese_decesso, biografia = biografia, immagine = immagine, tab = entitascelta)
+    return render_template("InsInfoA.html", nome = nome, cognome = cognome, data_nascita = formatted_data_nascita_str, data_decesso = formatted_data_decesso_str, citta_natale = citta_natale, paese_natale = paese_natale, citta_decesso = citta_decesso, paese_decesso = paese_decesso, biografia = biografia, immagine = immagine, tab = entitascelta)
   elif entitascelta == "Opera":
     IDM = request.args['nome_col_IDM']
     IDA = request.args['nome_col_IDA']
@@ -728,19 +747,19 @@ def InsInfo():
     data_creazione = request.args['nome_col_data_creazione']
     descrizione = request.args['nome_col_descrizione']
     immagine = request.args['nome_col_immagine']
-    query = f"INSERT INTO table_name (IDM, IDA, titolo, tecnica, stile, data_creazione, descrizione, immagine) VALUES ({IDM}, {IDA}, {titolo}, {tecnica}, {stile}, {data_creazione}, {descrizione}, {immagine});"
+    query = f"INSERT INTO {entitascelta} (IDM, IDA, titolo, tecnica, stile, data_creazione, descrizione, immagine) VALUES ({IDM}, {IDA}, '{titolo}', '{tecnica}', '{stile}', '{data_creazione}', '{descrizione}', '{immagine}');"
     df2 = pd.read_sql(query,conn)
     return render_template("InsInfoO.html", IDM = IDM, IDA = IDA, titolo = titolo, tecnica = tecnica, stile = stile, data_creazione = data_creazione, descrizione = descrizione, immagine = immagine, tab = entitascelta)
   elif entitascelta == "Personaggio":
     nome = request.args['nome_col_nome']
-    query = f"INSERT INTO table_name (nome) VALUES ({nome});"
+    query = f"INSERT INTO {entitascelta} (nome) VALUES ('{nome}');"
     df2 = pd.read_sql(query,conn)
     return render_template("InsInfoP.html", nome = nome, tab = entitascelta)
   else:
     nome_utente = request.args['nome_col_nome_utente']
     email = request.args['nome_col_email']
     passw = request.args['nome_col_passw']
-    query = f"INSERT INTO table_name (nome_utente, email, passw) VALUES ({nome_utente}, {email}, {passw});"
+    query = f"INSERT INTO {entitascelta} (nome_utente, email, passw) VALUES ('{nome_utente}', '{email}', '{passw}');"
     df2 = pd.read_sql(query,conn)
     return render_template("InsInfoU.html", nome_utente = nome_utente, email = email, passw = passw, tab = entitascelta)
 
@@ -766,9 +785,15 @@ def AggiorInfo():
 def ElInfo():
   nome_col = request.args['nome_col']
   val_elim = request.args['val_elim']
-  query = f"DELETE FROM {entitascelta} WHERE {nome_col} = '{val_elim}';"
-  df2 = pd.read_sql(query,conn)
-  return render_template("ElInfo.html", nom_col = nome_col, new_val = new_val, id_row = id_row, tab = entitascelta)
+  if isinstance(val_elim, str) :
+    query = f"DELETE FROM {entitascelta} WHERE {nome_col} = '{val_elim}';"
+    df2 = pd.read_sql(query,conn)
+    return render_template("ElInfo.html", nom_col = nome_col, tab = entitascelta)
+  else:
+    query = f"DELETE FROM {entitascelta} WHERE {nome_col} = {val_elim};"
+    df2 = pd.read_sql(query,conn)
+    return render_template("ElInfo.html", nom_col = nome_col, tab = entitascelta)
+
 
 
 
