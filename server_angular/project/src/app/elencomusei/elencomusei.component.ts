@@ -24,7 +24,7 @@ export class ElencomuseiComponent implements OnInit{
      // in questo caso e inutile mydata poiche abbiamo dati
     mydata: any;
     ngOnInit(): void {
-      this.ElencopersonaggiService.getdata().pipe(take(1)).subscribe((data: any) => {
+      this.ElencopersonaggiService.getdata().subscribe((data: any) => {
         this.dati = data;
       });
       
