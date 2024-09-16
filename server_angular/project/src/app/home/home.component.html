@@ -1,0 +1,194 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body style="height: 100%;">
+    
+    <nav class="navbar navbar-dark bg-dark justify-content-between" style="margin-bottom: 8px;">
+      <a class="navbar-brand" style="margin-left: 20px;" [routerLink]="['/intro-guide']">
+        <!-- <img src="assets/images/Logo.jpg"  width="120" height="120"> -->Fine Arts
+      </a>
+      <div class="btn-group">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="main_nav">
+            <ul class="navbar-nav">
+  
+              <li class="nav-item dropdown" id="myDropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Museo  </a>
+                <ul class="dropdown-menu">
+                  <li> <a class="dropdown-item" [routerLink]="['/elencomusei']"> Elenco museo </a></li>
+                  <li *ngIf="!localStorageIsEmpty"> <a class="dropdown-item" [routerLink]="['/primservopera']"> visualizzazione del museo che contiene più opere create con una tecnica specifica</a></li>
+                  <li *ngIf="!localStorageIsEmpty"><a class="dropdown-item" [routerLink]="['/secservopera']"> visualizzazione museo che mostra più opere di un&#39;artista specifico </a></li>
+                </ul>
+              </li>
+  
+              <li class="nav-item dropdown" id="myDropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  opera  </a>
+                <ul class="dropdown-menu">
+                  <li> <a class="dropdown-item" [routerLink]="['/elencoopere']"> Elenco opera </a></li>
+                  <li *ngIf="!localStorageIsEmpty"> <a class="dropdown-item" [routerLink]="['/operapersonaggi']"> Visualizzazione personaggi in cui compaiono in un'opera specifica</a></li>
+                  <li *ngIf="!localStorageIsEmpty"><a class="dropdown-item" [routerLink]="['/operatitolo']"> Visualizzazione opera specifica </a></li>
+                </ul>
+              </li>
+  
+              <li class="nav-item dropdown" id="myDropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  artista  </a>
+                <ul class="dropdown-menu">
+                  <li> <a class="dropdown-item" [routerLink]="['/artisti']"> Elenco artisti </a></li>
+                  <li *ngIf="!localStorageIsEmpty"><a class="dropdown-item" [routerLink]="['/annodataartisti']"> Visualizzazione artista nato in un anno specifico </a></li>
+                </ul>
+              </li>
+  
+              <li class="nav-item dropdown" id="myDropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Personaggi  </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" [routerLink]="['/elencopersonaggi']"> Elenco Personaggi </a></li>
+                  <li *ngIf="!localStorageIsEmpty"><a class="dropdown-item" [routerLink]="['/personaggio']"> Visualizzazione opere in cui compare un personaggio specifico</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+  
+  
+      <!-- </div> -->
+    <div class="form-inline">
+      <button class="btn btn-outline-light my-2 my-sm-0" style="margin-right: 20px;" routerLink="/register" *ngIf="localStorageIsEmpty"
+      >Sign up </button>
+      <button class="btn btn-outline-light my-2 my-sm-0" style="margin-right: 20px;" routerLink="/login" *ngIf="localStorageIsEmpty"
+      > login</button>
+      <button class="btn btn-outline-light my-2 my-sm-0" style="margin-right: 20px;" *ngIf="!localStorageIsEmpty"
+      (click)="logout()">logout</button>
+        <!-- <button class="btn btn-outline-light my-2 my-sm-0" onclick="location.href='http://www.example.com'" type="button">login</button> -->
+      </div>
+    </nav>
+
+    <!-- <div class="container"> -->
+    <div class="container">
+      <!-- <p style="text-align: center;">(questi tre non sono correlati e sono generati casualmente)</p> -->
+      <h2>Opera </h2> 
+      <br>
+      <h4>La Primavera di Sandro Botticelli</h4>
+      <div class="container__contenuto">
+        <hr>
+        <div class="col-sm-12 col-xl-6">
+          <p>È un’opera molto celebre per via del soggetto allegorico e dal significato ancora non del tutto svelato.
+
+            I personaggi allegorici del dipinto sono allineati sul primo piano di un paesaggio scuro e controluce. Infatti a destra Zefiro raggiunge e abbraccia la Ninfa Clori che appare nuovamente a sinistra nelle forme di Flora vestita di fiori. Al centro poi sono raffigurati Venere e Cupido che scaglia il dardo d’amore. Le tre Grazie inoltre danzano sulla sinistra vestite con veli trasparenti. Mercurio infine alza il braccio destro e con il caduceo tocca una nuvola. Infine il prato è cosparso di fiori ed erbe mentre tra le fronde degli alberi sono dipinti frutti color arancio.
+          </p>
+        </div>
+        <div class="col-sm-12 col-xl-6 cont_img">
+          <img class="immagine" src="assets/images/La_Primavera.jpeg" alt="Immagine dell'Opera">
+        </div>
+      </div>
+
+
+      <h2 >Artista</h2>
+      <br>
+      <h4>René Magritte</h4>
+      <div class="container__contenuto">
+        <hr>
+        <div class="col-sm-12 col-xl-6">
+          <p>
+            Ebbe una storia tragica, nato a Lessines, Belgio, nel 21 novembre 1898, il padre Léopold Magritte era un sarto. Da giovane si trasferisce più volte con la famiglia: nel 1910, all'età di 12 anni, si trasferirono a Châtelet, dove sua madre Régina Bertinchamps, due anni dopo, nel 1912, morirà gettandosi nel fiume Sambre.
+            Nonostante questa storia crepacuore tenne una vita da pittore con successo. 
+          </p>
+        </div>
+        <div class="col-sm-12 col-xl-6 ">
+          <img class="immagine" src="assets/images/rene_magritte.jpeg" alt="Immagine dell'Artista" style="max-width: 400px; max-height: 350px;">
+        </div>
+      </div>
+
+      
+
+      <h2>Museo</h2>
+      <br>
+      <h4>Galleria Palatina di Firenze</h4>
+      <div class="container__contenuto">
+        <hr>
+        <div class="col-sm-12 col-xl-6">
+          <p>
+            La Galleria Palatina di Firenze è una straordinaria raccolta di dipinti del Rinascimento e del Seicento voluta dai Lorena in Palazzo Pitti per dare definitiva collocazione alle opere appartenute alla famiglia Medici.
+          </p>
+        </div>
+        <div class="col-sm-12 col-xl-6 ">
+          <img class="immagine" src="assets/images/Galleria_Palatina.jpeg" alt="Immagine del Museo" style="max-width: 400px; max-height: 350px;">
+        </div>
+      </div>
+    </div>
+      
+
+
+    <!-- {{tempNumOpera}} -->
+    <!-- {{tempNumArtista}}
+    {{tempNumMuseo}} -->
+
+    <!-- </div> -->
+
+    <!-- <div class="container">
+      <p style="text-align: center;">(questi tre non sono correlati e sono generati casualmente)</p>
+      <h2>Opera </h2> 
+      <br>
+      <div *ngFor="let item of datiOpera">
+        <h4>{{item.titolo}}</h4>
+        <div class="container__contenuto">
+          <hr>
+          <div class="col-sm-12 col-xl-6">
+            <p>
+              {{item.descrizione}}
+            </p>
+          </div>
+          <div class="col-sm-12 col-xl-6 cont_img">
+            <img class="immagine"  [src]="item.immagine" alt="Immagine dell'Opera" style="max-width: 400px; max-height: 350px;">
+          </div>
+        </div>
+      </div>
+
+
+      <h2 >Artista</h2>
+      <br>
+      <div *ngFor="let item of datiArtista">
+        <h4>{{item.Nome}} {{item.cognome}}</h4>
+        <div class="container__contenuto">
+          <hr>
+          <div class="col-sm-12 col-xl-6">
+            <p>
+              {{item.biografia}}
+            </p>
+          </div>
+          <div class="col-sm-12 col-xl-6 cont_img">
+            <img class="immagine"  [src]="item.immagine" alt="Immagine dell'Artista" style="max-width: 400px; max-height: 350px;">
+          </div>
+        </div>
+      </div>
+
+      
+
+      <h2>Museo</h2>
+      <br>
+      <div *ngFor="let item of datiMuseo">
+        <h4>{{item.nome}}</h4>
+        <div class="container__contenuto">
+          <hr>
+          <div class="col-sm-12 col-xl-6">
+            <p>
+              {{item.descrizione}}
+            </p>
+          </div>
+          <div class="col-sm-12 col-xl-6 cont_img">
+            <img class="immagine"  [src]="item.immagine" alt="Immagine dell'Opera" style="max-width: 400px; max-height: 350px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{datiOpera | json}}
+    {{datiArtista | json}}
+    {{datiMuseo | json}} -->
+  </body>

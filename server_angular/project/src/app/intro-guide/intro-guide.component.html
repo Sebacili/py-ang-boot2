@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"  title="Toggle Navigation Menu"></a>
+    <a href="/" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+  </div>
+</div>
+
+
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+
+  <!-- The Band Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px">
+    <h2 class="w3-wide">Fine Arts</h2>
+    <p class="w3-opacity"><i>Interestingly interesting</i></p>
+    <p style="text-align: center;">
+        this website is focused on searching every curiousity you have.
+    </p>
+  </div>
+
+  <!-- The Tour Section -->
+  <div class="w3-black" id="tour">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+         <h2 class="w3-wide w3-center">Services</h2>
+        <p class="w3-opacity w3-center"><i>know your way</i></p><br>
+        <p class="w3-justify">
+          Fine Arts è un sito culturale ideato da Basco Luke e Cilibeanu Sebastian che ha come obiettivo quello di offrire una vasta gamma di contenuti riguardanti il mondo delle arti. Il sito offre una sezione dedicata alle opere d'arte, in cui gli utenti possono visualizzare un' opera specifica e determinati personaggi che appaiono sempre in un' opera specifica. Inoltre, è presente una sezione dedicata ai musei, in cui gli utenti possono scoprire informazioni sui musei più famosi del mondo.
+
+          Il sito offre anche una sezione dedicata ai personaggi delle opere, dove è possibile l' elenco dei personaggi e le opere specifiche in cui appaiono. Infine, c'è una sezione dedicata agli autori delle arti, in cui gli utenti possono scoprire informazioni sugli autori e visualizzarli in base alla data di nascita.
+          
+          In generale Fine Arts offre una vasta gamma di contenuti riguardanti il mondo delle arti, fornendo agli utenti la possibilità di scoprire nuove opere, musei, personaggi e autori delle arti presenti nel mondo, in modo da ampliare la loro conoscenza e la loro comprensione del mondo delle arti.
+        </p>
+<HR>
+        Nel sito attualmente son presenti le seguenti informazioni: <br>
+
+        <br> Artisti: Raffaello Sanzio, Sandro Botticelli, Michelangelo Merisi(Caravaggio),Leonardo Da Vinci, Vincent Willem Van Gogh, Eugène Delacroix, Théodore Géricault, Jacques-Louis David, Edvard Munch, René Magritte. <br>
+        <br> Opere:            La Velata, Nascita di Venere, Cena in Emmaus, Gioconda, Notte stellata, La Libertà che guida il popolo, La zattera della Medusa, Bonaparte valica il Gran San Bernardo, Urlo, Golconde, Ultima Cena, La Primavera.<br>
+        <br> Musei:            Galleria Degli Uffizi, Pinacoteca di Brera, Louvre, Museum of Modern Art, Palazzo del Belvedere, Galleria Nazionale di Oslo, Menil Collection di Houston, Chiesa di Santa Maria delle Grazie, Galleria Palatina. <br>
+        <br> Personaggi:       andare a vedere nel dropdowm-menu(il "pulsante" in alto al centro della homepage) personaggi-->Elenco Personaggi
+        
+      
+    </div>
+  </div>
+
+
+  <!-- The Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+    <h2 class="w3-wide w3-center">CONTACT</h2>
+    <p class="w3-opacity w3-center"><i>Fan? Drop a note!</i></p>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker" style="width:30px"></i> Milan, IT<br>
+        <i class="fa fa-phone" style="width:30px"></i> Phone: +39 46290127726<br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: magnificientArts@ProfessianalyMade4U.com<br>
+      </div>
+      <div class="w3-col m6">
+
+        <form *ngIf="!localStorageIsEmpty" [formGroup]="addsuggFrom" (ngSubmit)="Create()">
+          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+            <div class="w3-half">
+              <input  class="w3-input w3-border" type="text" placeholder="User Name" required name="name_user" formControlName="name_user" id="name_user" name="name_user">
+            </div>
+            <div class="w3-half">
+              <input class="w3-input w3-border" type="email" placeholder="Email" required name="email" formControlName="email" id="email" name="email">
+            </div>
+          </div>
+          <input class="w3-input w3-border" type="text" placeholder="Message" required name="message" formControlName="message" id="message" name="message">
+          <button type="submit" class="w3-button w3-black w3-section w3-right" [disabled]="!addsuggFrom.valid" (click)="reload()">SEND</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  
+<!-- End Page Content -->
+</div>
+
+<!-- Image of location/map -->
+<!-- {{name_user}}
+{{email}}
+{{message}} -->
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+  <!-- <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i> -->
+  <p class="w3-medium">Powered by <a href="" target="_blank">My Brain</a></p>
+</footer>
+
+
+</body>
+</html>

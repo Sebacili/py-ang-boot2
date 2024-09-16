@@ -1,0 +1,32 @@
+<h1>Visualizzazione opera specifica</h1>
+
+<br>
+
+<form>
+  <div class="form-outline mb-4">
+    <input #t [(ngModel)]="titolo" class="form-control form-control-lg" placeholder="inserisci nome opera per visualizzare i personaggi di quell' opera es. Nascita di Venere" name = "titolo" required/>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button (click)="onClick(t)"> cerca </button>
+    <!-- <button (click)="onClick(t)" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"> Cerca </button> -->
+  </div>
+</form>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+  <!-- Source -->
+<div class="card flex-row" *ngFor="let data of dati">
+    <img class="card-img-left example-card-img-responsive" style="min-width: 300px; min-height: 300px;" [src]="data.immagine"/>
+    <div class="card-body">
+      <h4 class="card-title h5 h4-sm">titolo opera: {{ data.titolo }}</h4>
+      <p class="card-text">data creazione: {{ data.data_creazione }}</p>
+      <p class="card-text">stile e tecninca utilizzata: {{ data.stile }}, {{ data.tecnica }}</p>
+      <p class="card-text">{{ data.descrizione }}</p>
+    </div>
+</div>

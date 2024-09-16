@@ -1,0 +1,86 @@
+<p> Modificare / aggiungere colonna works!</p>
+
+<h1>Opere sulle colonne:</h1>
+<h3>Aggiungere colonna</h3>
+<form action="/backend/collaborators/modificadesiderata/AggCol" method = "post">
+    <!-- input textbox -->
+    <p>vorrei aggiungere una colonna chiamata: <input type = "text" name = "nome_col" /><br>
+        di tipo: <br>
+            <select name="data_type">
+            <option value="int">int</option>
+            <option value="datetime">datetime</option>
+            <option value="varchar">varchar</option>
+            </select>
+    </p>
+
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+
+<h3>Eliminare colonna</h3>
+<form action="/backend/collaborators/modificadesiderata/ElCol" method = "post">
+    <!-- input textbox -->
+    <p>vorrei eliminare una colonna di nome: <input type = "text" name = "nome_col" /><br>
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+
+<h3>Rinominare colonna</h3>
+<form action="/backend/collaborators/modificadesiderata/RinCol" method = "post">
+    <!-- input textbox -->
+    <p>vorrei rinominare una colonna di nome: <input type = "text" name = "nome_col" />, e rimpiazzarlo con: <input type = "text" name = "new_nome_col" />
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+
+<h3>Alterare data_type colonna</h3>
+<form action="/backend/collaborators/modificadesiderata/altDTCol" method = "post">
+    <!-- input textbox -->
+    <p>vorrei modificare il data type della colonna di nome(se ce un date inserirlo nel seguente modo: YYYY-MM-DD): <input type = "text" name = "nome_col" /><br>
+        con questo tipo di data type: <br>
+        <select name="data_type">
+            <option value="int">int</option>
+            <option value="datetime">datetime</option>
+            <option value="varchar">varchar</option>
+            </select>
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+
+
+<h1>Opere sugli informazione:</h1>
+<h3>Inserire Informazione</h3>
+<form action="/backend/collaborators/modificadesiderata/InsInfo" method = "post">
+    <!-- input textbox -->
+    <p>vorrei inserire un info in questo ordine: <br>
+        {% for col in nomicolonne %}
+        {{col}} : <input type = "text" name = "nome_col_{{col}}" /> <br>
+        {% endfor %}
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+
+<h3>Aggiornare Informazione</h3>
+<p>tip puoi eliminare un valore sostituendolo con uno spazio bianco o mettere null come valore</p>
+<form action="/backend/collaborators/modificadesiderata/AggiorInfo" method = "post">
+    <!-- input textbox -->
+    <p>vorrei aggiornare l'informazione della colonna  <input type = "text" name = "nome_col" /> e il suo valore a <input type = "text" name = "new_val" /> where id è <input type = "text" name = "id" />
+
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+
+<h3>Eliminare Informazione</h3>
+<form action="/backend/collaborators/modificadesiderata/ElInfo" method = "post">
+    <!-- input textbox -->
+    <p>vorrei eliminare il row / i row dove il dato è uguale a : <input type = "text" name = "val_elim" /> <br>
+        nella colonna : <input type = "text" name = "nome_col" />
+
+    </p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>

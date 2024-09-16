@@ -1,0 +1,129 @@
+<head>Fine Arts</head>
+<h1>per utenti non  registrati:</h1>
+
+<form action = "/servizio1" method = "GET">
+    <p> lista dei musei <input type = "text" name = "museo" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+<form action = "/servizio2" method = "GET">
+    <p> inserire opera per visualizzare personaggi: <input type = "text" name = "personaggi" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+<form action = "/servizio3" method = "GET">
+    <p> inserire personaggio per visualizzare museo: <input type = "text" name = "museo_personaggio" /></p> 
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+
+<h1>per utenti registrati:</h1>
+<form action = "/servizio4" method = "GET">
+    <p> inserire nome artista: <input type = "text" name = "artist_name" /></p>
+    <p> inserire cognome artista: <input type = "text" name = "artist_surname" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+
+<hr>
+<form action = "/servizio5" method = "GET">
+    <p> inserire nome artista: <input type = "text" name = "nomeartista" /></p>
+    <p> inserire cognome artista: <input type = "text" name = "cognomeartista" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+<form action = "/servizio6" method = "GET">
+    <p> CLICCA QUESTO TASTO PER AVERE INFORMAZIONI DI TUTTI GLI ARTISTI <input type = "text" name = "artisti" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+<form action = "/servizio7" method = "GET">
+    <p> inserire 'TECNICA SPECIFICA' (esempio : olio su tela) per visualizzare il museo che contiene più opere con la tecnica specificata: <input type = "text" name = "tecnicascelta" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+
+<hr>
+<form action = "/servizio8" method = "GET">
+    <p> inserire 'STILE SPECIFICATO' (esempio : Rinascimento) per visualizzare il museo che contiene più opere con lo stile specificato: <input type = "text" name = "stileins" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+<form action = "/servizio9" method = "GET">
+<p>visualizzazione del personaggio che compare in più opere <input type = "text" name = "personaggio_opere" /></p>
+<p><input type = "submit" value = "Submit" /></p>
+</form>
+<hr>
+<form action = "/servizio10" method = "GET">
+    <p>visualizzazione del personaggio che compare di meno<input type = "text" name = "personaggio_opere_min" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+    </form>
+<hr>
+<form action = "/servizio11" method = "GET">
+        <p>inserire titolo di un' opera<input type = "text" name = "titoloins" /></p>
+        <p><input type = "submit" value = "Submit" /></p>
+        </form>
+
+<hr>
+    <form action = "/servizio12" method = "GET">
+            <p>inserire data decesso di un artista<input type = "text" name = "datains" /></p>
+            <p><input type = "submit" value = "Submit" /></p>
+            </form>
+
+     <form action = "/servizio13" method = "GET">
+            <p>visualizzazione degli artisti ancora in vita <input type = "text" name = "artisti_vivi" /> </p>
+            <p><input type = "submit" value = "Submit" /></p>
+        </form>
+        <hr>
+    <form action = "/servizio14" method = "GET">
+            <p>inserire data nascita di un artista<input type = "text" name = "datanascitains" /></p>
+            <p><input type = "submit" value = "Submit" /></p>
+            </form>
+            <hr>
+    <form action = "/servizio15" method = "GET">
+                <p>inserire citta natale<input type = "text" name = "cittanatins" /></p>
+                <p><input type = "submit" value = "Submit" /></p>
+                </form>
+                <h1>UTENTE</h1>
+
+    <form action = "/servizio16" method = "POST">
+                    <p> Registrazione:</p>
+                    <p>inserire nome utente<input type = "text" name = "nome_utente" /></p>
+                    <p>inserire email <input type = "text" name = "email" /></p>
+                    <p>inserire password <input type = "password" name = "password" /></p>
+                    <p><input type = "submit" value = "Submit" /></p>
+                    </form>
+                
+    <form action = "/servizio17" method = "POST">
+        <p>Login:</p>
+        <p>inserire nome utente<input type = "text" name = "nome_utente" /></p>
+        <p>inserire email <input type = "text" name = "email" /></p>
+        <p>inserire password <input type = "password" name = "password" /></p>
+        <p><input type = "submit" value = "Submit" /></p>
+            </form>
+            <form action = "/servizio18" method = "POST">
+                <p>Modifica info utente:</p>
+                <p>inserire vecchio nome utente<input type = "text" name = "old_name" /></p>
+                <p>inserire nuovo nome utente <input type = "text" name = "new_name" /></p>
+                <p>inserire vecchia email<input type = "text" name = "old_email" /></p>
+                <p>inserire nuova email <input type = "text" name = "new_email" /></p>
+                <p>inserire nuova password<input type = "password" name = "new_password" /></p>
+                <p>inserire email corrente<input type = "text" name = "current_email" /></p>
+                <p><input type = "submit" value = "Submit" /></p>
+                    </form>
+
+                    <form action = "/servizio21" method = "POST">
+                        <p>Visualizzazione info utente:</p>
+                        <p>inserire email corrente<input type = "text" name = "current_email" /></p>
+                        <p><input type = "submit" value = "Submit" /></p>
+                            </form>
+
+                            <form action = "/servizio22" method = "POST">
+                                <p>Rimozione account:</p>
+                                <p>inserire email corrente<input type = "text" name = "current_email" /></p>
+                                <p>inserire usermame corrente<input type = "text" name = "current_name" /></p>
+                                <p>inserire password corrente<input type = "password" name = "current_password" /></p>
+
+                                <p><input type = "submit" value = "Submit" /></p>
+                                    </form>
+           
+   
+
+
